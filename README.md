@@ -1,0 +1,4 @@
+Ajaila
+======
+
+Core Ajaila Application
