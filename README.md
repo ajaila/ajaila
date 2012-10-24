@@ -1,8 +1,5 @@
 <img src="https://raw.github.com/mac-r/Ajaila-Skeleton/master/ajaila_github.png" alt="Ajaila Logo">
 ## Ajaila Datamining Sandbox
-### Skeleton Repo
-
-This is the architectural sample of Ajaila Datamining Sandbox.
 
 ### Warning!
 Ajaila is currently in the development mode. Please don't follow the instruction below.
