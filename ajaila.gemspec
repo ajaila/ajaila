@@ -21,6 +21,7 @@ Gem::Specification.new do |s|
   s.add_dependency("mongo_mapper")
   s.add_dependency("json")
   s.add_dependency("typhoeus")
+  s.add_dependency("rio")
   s.add_development_dependency("rspec")
   s.add_development_dependency("rake")
   s.add_development_dependency("rdoc")

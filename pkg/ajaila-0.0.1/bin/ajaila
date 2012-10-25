@@ -2,7 +2,7 @@
 require 'rubygems'
 require 'gli'
 include GLI::App
-
+require 'rio'
 class Colors
    COLOR1 = "\e[1;36;40m"
    COLOR2 = "\e[1;35;40m"
@@ -24,19 +24,15 @@ end
 command :new do |c|
   c.action do |global_options,options,args|
     app_name = args.first
-#    puts Dir.getwd 
     raise TypeError, 'Ajaila: you should enter the name for your app!'.color(Colors::RED) if app_name == nil
     puts "Ajaila: generating new application \"#{app_name}\"".color(Colors::GREEN)
-
     app_root = Dir::pwd + "/" + app_name
-
     begin
       Dir::mkdir(app_root)
       puts "\tcreated application root"
      rescue
       raise TypeError, "Ajaila: try another name, \"#{app_name}\" folder already exists!".color(Colors::RED)
     end
-
     Dir::mkdir("#{app_root}/assets")
     puts "\tprepared Assets"
     Dir::mkdir("#{app_root}/config")
@@ -53,9 +49,28 @@ command :new do |c|
     puts "\tprepared Presenters folder in the Sandbox directory"
     Dir::mkdir("#{app_root}/sandbox/tables")
     puts "\tprepared Tables folder in the Sandbox directory"
-
   end
 end
 
+# generating miners,selectors,tables and presenters 
+command :generate do |c|
+  c.action do |global_options,options,args|
+  	root = true if Dir['*/'].include?("sandbox/") and Dir['*/'].include?("datasets/")
+  	raise TypeError, 'Ajaila: please, run commands from the root directory'.color(Colors::YELLOW) if root != true
+    known_instances = ["miner","selector","presenter","table"]
+  	instance_type = args[0]
+  	raise TypeError, 'Ajaila: unknown instance (ex. miner SomeMiner, selector SomeSelector, presenter SomePresenter, table SomeTable)'.color(Colors::YELLOW) if known_instances.include?(instance_type) == false
+    instance_name = args[1]
+    raise TypeError, 'Ajaila: wrong format for the instance name (use only A-Z and a-z symbols)'.color(Colors::YELLOW) if instance_name[/^[A-Z]+$/i] == nil
+    puts "\tGenerating #{instance_type} #{instance_name}"
+    dir = "datasets/" if instance_type == "selector"
+    dir = "sandbox/miners/" if instance_type == "miner"
+    dir = "sandbox/presenters/" if instance_type == "presenter"
+    dir = "sandbox/tables/" if instance_type == "table"
+    content = "Uncle Tom\nwas singing in the dorm!"
+    File.open("#{dir}#{instance_name.downcase}.#{instance_type}.rb", 'w') {|f| f.write(content) }
+    puts "\tGenerated #{instance_type} #{instance_name} successfully!".color(Colors::GREEN)
+  end
+end
 
 exit run(ARGV)
