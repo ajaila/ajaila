@@ -66,9 +66,15 @@ command :generate do |c|
   	root = true if Dir['*/'].include?("sandbox/") and Dir['*/'].include?("datasets/")
   	raise TypeError, 'Ajaila: please, run commands from the root directory'.color(Colors::YELLOW) if root != true
     known_instances = ["miner","selector","presenter","table"]
+    raise TypeError, 'Ajaila: unknown command...'.color(Colors::YELLOW) if args == nil
   	instance_type = args[0]
   	raise TypeError, 'Ajaila: unknown instance (ex. miner SomeMiner, selector SomeSelector, presenter SomePresenter, table SomeTable)'.color(Colors::YELLOW) if known_instances.include?(instance_type) == false
-    instance_name = args[1]
+    begin
+      raise TypeError, 'Ajaila: unknown command...'.color(Colors::YELLOW) if args[1] == nil
+      instance_name = args[1]
+     rescue
+      raise TypeError, 'Ajaila: define instance name (use only A-Z and a-z symbols)'.color(Colors::YELLOW) #if instance_name == nil
+    end
     raise TypeError, 'Ajaila: wrong format for the instance name (use only A-Z and a-z symbols)'.color(Colors::YELLOW) if instance_name[/^[A-Z]+$/i] == nil
     puts "\tGenerating #{instance_type} #{instance_name}"
     dir = "datasets/" if instance_type == "selector"
@@ -106,24 +112,117 @@ command :generate do |c|
       end
     end
 
+
+    if instance_type == "selector"
+      begin
+         using = false
+         k, files, tables  = 0, [], []
+         args.each do |arg|
+           k += 1
+           using = true if arg == "using" and k == 3
+           next if k <= 3
+           additions = arg.split(':')
+           addition_type = additions[0].downcase
+           addition_core = additions[1].downcase
+           files << addition_core if addition_type == "file"
+         end
+         puts "files: #{files}"     
+         content = ""
+         puts 'Ajaila: wrong parameters usage (ex. using SomeFile.csv)'.color(Colors::YELLOW) if using == true and files.empty?
+         raise TypeError if using == true and files.empty?
+         supported_files = ["csv"]
+         lines = []
+         files.each do |key_string|
+           file = key_string.split('.')
+           file_name = file[0]
+           file_type = file[1]
+           puts 'Ajaila: sorry, but we support only .csv for now...'.color(Colors::YELLOW) if supported_files.include?(file_type) == false or file_type == nil
+           raise TypeError if supported_files.include?(file_type.to_s) == false or file_type == nil
+           if file_type == "csv"
+             lines << "require \"csv\"\n"
+             lines << "FILE = File.expand_path(\"../datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n"
+             lines << "data = {}\nCSV.foreach(FILE) do |row|\n  # data[\"smth\"] = row[0]\nend\n"
+           end
+         end
+
+       rescue
+        raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
+      end
+    end
+
+    # if instance_type == "miner"
+    # end
+    
+    # if instance_type == "miner"
+    # end
+
     File.open("#{dir}#{instance_name.downcase}.#{instance_type}.rb", 'w') {|f| f.write(content) }
     puts "\tGenerated #{instance_type} #{instance_name} successfully!".color(Colors::GREEN)
     
   end
+
+  command :tables do |c|
+    c.action do |global_options,options,args|
+           puts "These are the app tables:"
+           tables, ind = {}, 1
+           Dir.glob("sandbox/tables/*.rb").each do |table|
+             tables[ind] = table.split("/").last.split(".").first
+             ind += 1
+           end
+           tables[0] = "There are now tables" if tables == {}
+           tables.each_key do |ind|
+             puts "\t#{ind}) #{tables[ind]}"
+           end
+    end
+  end
+
+  command :miners do |c|
+    c.action do |global_options,options,args|
+           puts "These are the app miners:"
+           miners, ind = {}, 1
+           Dir.glob("sandbox/miners/*.rb").each do |miner|
+             miners[ind] = miner.split("/").last.split(".").first
+             ind += 1
+           end
+           miners[0] = "There are now miners" if miners == {}
+           miners.each_key do |ind|
+             puts "\t#{ind}) #{miners[ind]}"
+           end
+    end
+  end
+
+  command :selectors do |c|
+    c.action do |global_options,options,args|
+           puts "These are the app selectors:"
+           selectors, ind = {}, 1
+           Dir.glob("datasets/*.selector.rb").each do |selector|
+             selectors[ind] = selector.split("/").last.split(".").first
+             ind += 1
+           end
+           selectors[0] = "There are now selectors" if selectors == {}
+           selectors.each_key do |ind|
+             puts "\t#{ind}) #{selectors[ind]}"
+           end
+    end
+  end
+
+  command :presenters do |c|
+    c.action do |global_options,options,args|
+           puts "These are the app presenters:"
+           presenters, ind = {}, 1
+           Dir.glob("sandbox/presenters/*.presenter.rb").each do |presenter|
+             presenters[ind] = presenter.split("/").last.split(".").first
+             ind += 1
+           end
+           presenters[0] = "There are now presenters" if presenters == {}
+           presenters.each_key do |ind|
+             puts "\t#{ind}) #{presenters[ind]}"
+           end
+    end
+  end
+
 end
 
 exit run(ARGV)
-
-# class SocialCampaigns
-#   include MongoMapper::Document
-#   key :id, String
-#   key :date, Date
-#   key :title, String
-#   key :organic_reach, Integer
-#   key :viral_reach, Integer
-#   key :clicked, Integer
-#   key :path, String
-#   key :link, String
-# end
 
 
