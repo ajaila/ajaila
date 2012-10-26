@@ -134,7 +134,9 @@ command :generate do |c|
          lines = []
          table_data = {}
          if tables != []
+           lines << "require \"mongo_mapper\"\n"
            tables.each do |table|
+             lines << "require \"../sandbox/tables/#{table}.table\"\n"
              File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
                while (line = infile.gets)
                  clas = line[/class\s(\S+)/,1] if clas == nil
@@ -154,9 +156,11 @@ command :generate do |c|
              puts 'Ajaila: sorry, but we support only .csv for now...'.color(Colors::YELLOW) if supported_files.include?(file_type) == false or file_type == nil
              raise TypeError if supported_files.include?(file_type.to_s) == false or file_type == nil
              if file_type == "csv"
-               lines << "require \"csv\"\n"
-               lines << "FILE = File.expand_path(\"../datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n\n"
-               lines << "CSV.foreach(FILE) do |row|\n"
+               cs = 1 if cs == nil
+               kf = "qwerty".split("").shuffle.join.upcase
+               lines << "require \"csv\"\n" if cs == nil
+               lines << "#{kf} = File.expand_path(\"../datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n\n"
+               lines << "CSV.foreach(#{kf}) do |row|\n"
                table_data.each_key do |table|
                  table_data[table].each do |key|
                    lines <<  "  #{key} = row[0] # put other indexes instead of 0\n"
@@ -172,26 +176,119 @@ command :generate do |c|
                    lines << ")\n"
                  end
                end
-               lines << "end\n"
+               lines << "end\n\n"
              end
            end
          end
 
 
-
-         puts "Ajaila: No selector title, file or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == []
-         raise TypeError if files == [] or tables == []
+        if using == true
+         puts "Ajaila: No selector title, file or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == [] 
+         raise TypeError if files == [] or tables == [] 
+        end
          content = lines.join
        rescue
         raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
       end
     end
 
-    # if instance_type == "miner"
-    # end
+    if instance_type == "miner"
+      begin
+         using = false
+         k, tables  = 0, []
+         args.each do |arg|
+           k += 1
+           using = true if arg == "using" and k == 3
+           next if k <= 3
+           additions = arg.split(':')
+           addition_type = additions[0].downcase
+           addition_core = additions[1].downcase
+           tables << addition_core if addition_type == "table"
+         end
+         content = ""
+         lines = []
+         table_data = {}
+         if tables != []
+           lines << "require \"mongo_mapper\"\n"
+           tables.each do |table|
+             lines << "require \"../tables/#{table}.table\"\n"
+             File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
+               while (line = infile.gets)
+                 clas = line[/class\s(\S+)/,1] if clas == nil
+                 key = line[/key\s:(\S+),/,1]
+                 table_data[clas] = [] if clas != nil and table_data[clas] == nil
+                 table_data[clas] << key if key != nil
+               end
+             end
+           end
+
+           table_data.each_key do |table|
+             lines << "  #{table}.create("
+             table_data[table].each do |key|
+               lines << "#{key}: #{key}, " if key != table_data[table].last
+               lines << "#{key}: #{key}" if key == table_data[table].last
+             end
+             lines << ")\n"
+           end
+         end
+
+        if using == true
+         puts "Ajaila: No selector title or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == [] 
+         raise TypeError if tables == [] 
+        end
+         content = lines.join
+       rescue
+        raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
+      end
+    end
     
-    # if instance_type == "miner"
-    # end
+    if instance_type == "presenter"
+      begin
+         using = false
+         k, tables  = 0, []
+         args.each do |arg|
+           k += 1
+           using = true if arg == "using" and k == 3
+           next if k <= 3
+           additions = arg.split(':')
+           addition_type = additions[0].downcase
+           addition_core = additions[1].downcase
+           tables << addition_core if addition_type == "table"
+         end
+         content = ""
+         lines = []
+         table_data = {}
+         if tables != []
+           tables.each do |table|
+             File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
+               while (line = infile.gets)
+                 clas = line[/class\s(\S+)/,1] if clas == nil
+                 key = line[/key\s:(\S+),/,1]
+                 table_data[clas] = [] if clas != nil and table_data[clas] == nil
+                 table_data[clas] << key if key != nil
+               end
+             end
+           end
+
+           table_data.each_key do |table|
+             lines << "<% #{table}.all.each do |d| %>\n"
+             table_data[table].each do |key|
+               lines << "  <div><%= d.#{key} %></div>\n"
+             end
+             lines << "  <br>\n"
+             lines << "<% end %>"
+           end
+         end
+
+        if using == true
+         puts "Ajaila: No presenter title or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == [] 
+         raise TypeError if tables == [] 
+        end
+         content = lines.join
+       rescue
+        raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
+      end
+    end
 
     File.open("#{dir}#{instance_name.downcase}.#{instance_type}.rb", 'w') {|f| f.write(content) }
     puts "\tGenerated #{instance_type} #{instance_name} successfully!".color(Colors::GREEN)
