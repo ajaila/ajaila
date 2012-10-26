@@ -82,7 +82,7 @@ command :generate do |c|
     dir = "sandbox/presenters/" if instance_type == "presenter"
     dir = "sandbox/tables/" if instance_type == "table"
 
-    content = "Uncle Tom\nwas singing in the dorm!"
+    #content = "Uncle Tom\nwas singing in the dorm!"
 
     if instance_type == "table"
       k, keys = 0, []
@@ -125,26 +125,63 @@ command :generate do |c|
            addition_type = additions[0].downcase
            addition_core = additions[1].downcase
            files << addition_core if addition_type == "file"
+           tables << addition_core if addition_type == "table"
          end
-         puts "files: #{files}"     
          content = ""
          puts 'Ajaila: wrong parameters usage (ex. using SomeFile.csv)'.color(Colors::YELLOW) if using == true and files.empty?
          raise TypeError if using == true and files.empty?
          supported_files = ["csv"]
          lines = []
-         files.each do |key_string|
-           file = key_string.split('.')
-           file_name = file[0]
-           file_type = file[1]
-           puts 'Ajaila: sorry, but we support only .csv for now...'.color(Colors::YELLOW) if supported_files.include?(file_type) == false or file_type == nil
-           raise TypeError if supported_files.include?(file_type.to_s) == false or file_type == nil
-           if file_type == "csv"
-             lines << "require \"csv\"\n"
-             lines << "FILE = File.expand_path(\"../datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n"
-             lines << "data = {}\nCSV.foreach(FILE) do |row|\n  # data[\"smth\"] = row[0]\nend\n"
+         table_data = {}
+         if tables != []
+           tables.each do |table|
+             File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
+               while (line = infile.gets)
+                 clas = line[/class\s(\S+)/,1] if clas == nil
+                 key = line[/key\s:(\S+),/,1]
+                 table_data[clas] = [] if clas != nil and table_data[clas] == nil
+                 table_data[clas] << key if key != nil
+               end
+             end
            end
          end
 
+         if files != []
+           files.each do |key_string|
+             file = key_string.split('.')
+             file_name = file[0]
+             file_type = file[1]
+             puts 'Ajaila: sorry, but we support only .csv for now...'.color(Colors::YELLOW) if supported_files.include?(file_type) == false or file_type == nil
+             raise TypeError if supported_files.include?(file_type.to_s) == false or file_type == nil
+             if file_type == "csv"
+               lines << "require \"csv\"\n"
+               lines << "FILE = File.expand_path(\"../datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n\n"
+               lines << "CSV.foreach(FILE) do |row|\n"
+               table_data.each_key do |table|
+                 table_data[table].each do |key|
+                   lines <<  "  #{key} = row[0] # put other indexes instead of 0\n"
+                 end
+               end
+               if tables != []
+                 table_data.each_key do |table|
+                   lines << "  #{table}.create("
+                   table_data[table].each do |key|
+                     lines << "#{key}: #{key}, " if key != table_data[table].last
+                     lines << "#{key}: #{key}" if key == table_data[table].last
+                   end
+                   lines << ")\n"
+                 end
+               end
+               lines << "end\n"
+             end
+           end
+         end
+
+
+
+         puts "Ajaila: No selector title, file or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == []
+         raise TypeError if files == [] or tables == []
+         content = lines.join
        rescue
         raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
       end
