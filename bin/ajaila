@@ -33,6 +33,8 @@ command :new do |c|
      rescue
       raise TypeError, "Ajaila: try another name, \"#{app_name}\" folder already exists!".color(Colors::RED)
     end
+
+    # creating directories
     Dir::mkdir("#{app_root}/assets")
     puts "\tprepared Assets"
     Dir::mkdir("#{app_root}/config")
@@ -49,6 +51,12 @@ command :new do |c|
     puts "\tprepared Presenters folder in the Sandbox directory"
     Dir::mkdir("#{app_root}/sandbox/tables")
     puts "\tprepared Tables folder in the Sandbox directory"
+
+    # creating files
+    gemfile_content = "source \"http://rubygems.org\"\n\ngem \"ajaila\""
+    File.open("Gemfile", 'w') {|f| f.write(gemfile_content) }
+
+
   end
 end
 
@@ -67,10 +75,55 @@ command :generate do |c|
     dir = "sandbox/miners/" if instance_type == "miner"
     dir = "sandbox/presenters/" if instance_type == "presenter"
     dir = "sandbox/tables/" if instance_type == "table"
+
     content = "Uncle Tom\nwas singing in the dorm!"
+
+    if instance_type == "table"
+      k, keys = 0, []
+      args.each do |arg|
+        k += 1
+        next if k <= 2
+        keys << arg
+      end
+      raise TypeError, 'Ajaila: define table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW) if keys == nil
+      content = ""
+      begin
+        lines = []
+        lines << "class #{instance_name.capitalize}\n  include MongoMapper::Document\n"
+        keys.each do |key_string|
+          params = key_string.split(':')
+          key_name = params[0]
+          key_type = params[1]
+          known_types = ["Array", "Float", "Hash", "Integer", "NilClass", "Object", "String", "Time", "Binary", "Boolean", "Date", "ObjectId", "Set"]
+          raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW) if known_types.include?(key_type.capitalize) == false
+          line = "  key :#{key_name.downcase}, #{key_type.capitalize}\n"
+          lines << line
+        end
+        lines << "end\n"
+        content = lines.join
+       rescue
+        raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW)
+      end
+    end
+
     File.open("#{dir}#{instance_name.downcase}.#{instance_type}.rb", 'w') {|f| f.write(content) }
     puts "\tGenerated #{instance_type} #{instance_name} successfully!".color(Colors::GREEN)
+    
   end
 end
 
 exit run(ARGV)
+
+# class SocialCampaigns
+#   include MongoMapper::Document
+#   key :id, String
+#   key :date, Date
+#   key :title, String
+#   key :organic_reach, Integer
+#   key :viral_reach, Integer
+#   key :clicked, Integer
+#   key :path, String
+#   key :link, String
+# end
+
+
