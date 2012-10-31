@@ -20,6 +20,38 @@ class String
    end
 end
 
+command :help do |c|
+  c.action do |global_options,options,args|
+    puts "Ajaila Datamining Sandbox v. 0.0.1"
+    puts "\tDo Science Magic Smoothly and Efficiently!"
+    puts "\nCommands:"
+    puts "  generate new application:\n\t - ajaila new YourApp\n"
+    puts "  generate table:\n\t - ajaila generate table SomeTable"
+    puts "  generate selector:\n\t - ajaila generate selector SomeSelector using file:input.csv table:sometable"
+    puts "  generate miner:\n\t - ajaila generate miner SomeMiner using table:sometable"
+    puts "  generate presenter:\n\t - ajaila generate presenter SomePresenter using table:sometable"
+    puts "  generate api:\n\t - ajaila generate api MyApi using table:sometable"
+    puts "  list of tables:\n\t - ajaila tables"
+    puts "  list of selectors:\n\t - ajaila seletors"
+    puts "  list of miners:\n\t - ajaila miners"   
+    puts "  list of presenters:\n\t - ajaila presenters" 
+  end
+end
+
+command :run do |c|
+  c.action do |global_options,options,args|
+    type = args[0]
+    name = args[1]
+    dir = ""
+    dir = "sandbox/miners/" if type == "miner"
+    dir = "datasets/" if type == "selector"
+    raise TypeError, 'Ajaila: unknown instance...'.color(Colors::YELLOW) if dir == "" if type != "s"
+    raise TypeError, 'Ajaila: no title for instance...'.color(Colors::YELLOW) if name == "" if type != "s"
+    require "./#{dir}#{name.downcase}.#{type.downcase}" if type != "s"
+    require "./service" if type == "s"
+  end
+end
+
 # generating new application
 command :new do |c|
   c.action do |global_options,options,args|
@@ -61,13 +93,18 @@ command :new do |c|
     service_content = []
     service_content << %Q{require "rubygems"\nrequire "sinatra"\nrequire "erb"\nrequire 'sinatra/assetpack'\nrequire \"mongo_mapper\"\n }
     Dir.glob('sandbox/tables/*.rb').each do |table|
-      service_content << "require \'../sandbox/tables/#{table.split("/").last}'\n"
+      service_content << "require \'./sandbox/tables/#{table.split("/").last}'\n"
     end 
 service_content << %Q{configure do
   MongoMapper.database = "ajaila_db"
 end
   
 set :views, settings.root + '/sandbox/presenters'
+
+Dir.glob("sandbox/tables/*.rb").each do |table|
+  puts "Loading tables..."
+  require "./\#\{table\}"
+end
 
 helpers do
   def partial template
@@ -105,7 +142,7 @@ set :public_folder, 'assets'
 
 
 get '/' do
-  erb :index
+  "<h1>Yo!</h1>"
 end
   }
     service = service_content.join
@@ -150,6 +187,7 @@ command :generate do |c|
       content = ""
       begin
         lines = []
+        lines << "MongoMapper.database = \"ajaila_db\"\n"
         lines << "class #{instance_name.capitalize}\n  include MongoMapper::Document\n"
         keys.each do |key_string|
           params = key_string.split(':')
@@ -183,15 +221,16 @@ command :generate do |c|
            tables << addition_core if addition_type == "table"
          end
          content = ""
-         puts 'Ajaila: wrong parameters usage (ex. using SomeFile.csv)'.color(Colors::YELLOW) if using == true and files.empty?
+         puts 'Ajaila: wrong parameters usage (ex. using file:SomeFile.csv)'.color(Colors::YELLOW) if using == true and files.empty?
          raise TypeError if using == true and files.empty?
          supported_files = ["csv"]
          lines = []
          table_data = {}
          if tables != []
+           lines << "require \"csv\"\n"
            lines << "require \"mongo_mapper\"\n"
            tables.each do |table|
-             lines << "require \"../sandbox/tables/#{table}.table\"\n"
+             lines << "require \"./sandbox/tables/#{table}.table\"\n"
              File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
                while (line = infile.gets)
                  clas = line[/class\s(\S+)/,1] if clas == nil
@@ -214,7 +253,7 @@ command :generate do |c|
                cs = 1 if cs == nil
                kf = "qwerty".split("").shuffle.join.upcase
                lines << "require \"csv\"\n" if cs == nil
-               lines << "#{kf} = File.expand_path(\"../datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n\n"
+               lines << "#{kf} = File.expand_path(\"./datasets/raw/#{file_name.downcase}.#{file_type.downcase}\")\n\n"
                lines << "CSV.foreach(#{kf}) do |row|\n"
                table_data.each_key do |table|
                  table_data[table].each do |key|
@@ -266,7 +305,7 @@ command :generate do |c|
          if tables != []
            lines << "require \"mongo_mapper\"\n"
            tables.each do |table|
-             lines << "require \"../tables/#{table}.table\"\n"
+             lines << "require \"./sandbox/tables/#{table}.table\"\n"
              File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
                while (line = infile.gets)
                  clas = line[/class\s(\S+)/,1] if clas == nil
@@ -329,7 +368,7 @@ command :generate do |c|
            table_data.each_key do |table|
              lines << "<% #{table}.all.each do |d| %>\n"
              table_data[table].each do |key|
-               lines << "  <div><%= d.#{key} %></div>\n"
+               lines << "  <div><b>#{key}</b>: <%= d.#{key} %></div>\n"
              end
              lines << "  <br>\n"
              lines << "<% end %>"
@@ -339,7 +378,7 @@ command :generate do |c|
          route = []
          route << "\n"
          route << "get \"/#{instance_name.downcase}\" do\n"
-         route << "  erb \"#{instance_name.downcase}\".to_sym\n"
+         route << "  erb \"#{instance_name.downcase}.presenter\".to_sym\n"
          route << "end\n"
          File.open("service.rb", "a") do |file|
            file.puts route

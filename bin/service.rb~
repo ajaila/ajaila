@@ -1,0 +1,86 @@
+require "rubygems"
+require "sinatra"
+require "erb"
+require 'sinatra/assetpack'
+require "mongo_mapper"
+ configure do
+  MongoMapper.database = "ajaila_db"
+end
+  
+set :views, settings.root + '/sandbox/presenters'
+
+Dir.glob("sandbox/tables/*.rb").each do |table|
+  puts "Loading tables..."
+  require "./#{table}"
+end
+
+helpers do
+  def partial template
+    erb template, :layout => false
+  end
+end
+
+# assets do  
+#   serve '/css', from: '/assets/css'
+#   serve '/js', from: '/assets/js'
+#   css :main, ['/css/*.css']
+#   js :main, ['/js/jquery.js','/js/jquery.min.js','/js/bootstrap.js','/js/bootstrap.min.js','/js/custom.js']
+#   js :affix, ['/js/bootstrap-affix.js']
+#   js :alert, ['/js/bootstrap-alert.js']
+#   js :button, ['/js/bootstrap-button.js']
+#   js :carousel, ['/js/bootstrap-carousel.js']
+#   js :collapse, ['/js/bootstrap-collapse.js']
+#   js :dropdown, ['/js/bootstrap-dropdown.js']
+#   js :modal, ['/js/bootstrap-modal.js']
+#   js :popover, ['/js/bootstrap-popover.js']
+#   js :scrollspy, ['/js/bootstrap-scrollspy.js']
+#   js :tab, ['/js/bootstrap-tab.js']
+#   js :tooltip, ['/js/bootstrap-tooltip.js']
+#   js :transition, ['/js/bootstrap-transition.js']
+#   js :typeahead, ['/js/bootstrap-typeahead.js']
+#   js :highcharts, ['/js/highcharts.js']
+# end
+
+set :public_folder, 'assets'
+
+# use Rack::Auth::Basic, "Restricted Area" do |username, password|
+#   [username, password] == ['admin', 'admin']
+# end
+
+
+
+get '/' do
+  "<h1>Yo!</h1>"
+end
+  
+get "/experts" do
+  erb "experts.presenter".to_sym
+end
+
+get '/api/my/name/:key' do
+  data = Koko.where(:name => params[:key] )
+  if data
+    data.to_json
+   else
+     error 404, {:error => "item not found"}.to_json
+  end
+end
+
+get '/api/my/film/:key' do
+  data = Koko.where(:film => params[:key] )
+  if data
+    data.to_json
+   else
+     error 404, {:error => "item not found"}.to_json
+  end
+end
+
+get '/api/my/score/:key' do
+  data = Koko.where(:scores => params[:key].to_i )
+  if data
+    data.to_json
+   else
+     error 404, {:error => "item not found"}.to_json
+  end
+end
+

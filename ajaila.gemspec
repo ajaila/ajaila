@@ -14,14 +14,14 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "ajaila"
   s.files = ["bin/ajaila"]
   s.executables = ["ajaila"]
-  s.add_dependency("bundler")
+  #s.add_dependency("bundler")
   s.add_dependency("gli")
   s.add_dependency("sinatra")
   s.add_dependency("sinatra-assetpack")
   s.add_dependency("mongo_mapper")
   s.add_dependency("json")
   s.add_dependency("typhoeus")
-  s.add_dependency("rio")
+  s#.add_dependency("rio")
   s.add_development_dependency("rspec")
   s.add_development_dependency("rake")
   s.add_development_dependency("rdoc")
