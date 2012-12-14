@@ -1,4 +1,4 @@
-<img src="https://github.com/ajaila/ajaila-skeleton/blob/master/ajaila_github.png" alt="Ajaila Logo">
+<img src="https://raw.github.com/ajaila/ajaila-skeleton/master/ajaila_github.png" alt="Ajaila Logo">
 ## Ajaila Datamining Sandbox
 
 ### Warning!
