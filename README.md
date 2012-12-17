@@ -38,23 +38,23 @@ Go to the sandbox. You'll see three core directories:
 
 When you import some raw file (ex. Raw_File.csv) create selector with the following command:
 ```
-ajaila generate selector Some_Selector using Raw_File.csv
+ajaila generate selector SomeSelector using RawFile.csv
 ```
 (defines the type of the file and attaches necessary parsers)
 
 Create tables:
 ```
-ajaila generate table Some_Table for Some_Selector with name:String date:Date
+ajaila generate table SomeTable for Some_Selector with name:String date:Date
 ```
 
 Create new miners:
 ```
-ajaila generate miner Some_Miner using Some_Table
+ajaila generate miner SomeMiner using SomeTable
 ```
 
 Create new presenters:
 ```
-ajaila generate presenter Some_Presenter using Some_Table
+ajaila generate presenter SomePresenter using SomeTable
 ```
 
 ### Experimental
