@@ -5,9 +5,12 @@ class Colors
    DARKGREEN = "\e[0;32;40m"
    YELLOW = "\e[1;33;40m"
    DARKCYAN = "\e[0;36;40m"
+   INFO = "\e[0;36;1m"
+
 end
 class String
    def color(color)
       return color + self + Colors::NOCOLOR
    end
 end
+

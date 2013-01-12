@@ -1,6 +1,6 @@
 command :help do |c|
   c.action do |global_options,options,args|
-    puts "Ajaila Datamining Sandbox v. 0.0.1"
+    puts "Ajaila Datamining Sandbox v. 0.0.2"
     puts "\tDo Science Magic Smoothly and Efficiently!"
     puts "\nCommands:"
     puts "  generate new application:\n\t - ajaila new YourApp\n"
