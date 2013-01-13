@@ -80,16 +80,16 @@ command :run do |c|
       options = args[0].split(":")
       if options.first == "m"
         system "ruby #{ROOT}/sandbox/miners/#{options[1].downcase}.miner.rb"
+      end
+      if options.first == "s"
+        system "ruby #{ROOT}/datasets/#{options[1].downcase}.selector.rb"
+      end
       puts "#############################################################################".color(Colors::GREEN)
       puts "#                                                                           #".color(Colors::GREEN)
       message = "#"+"Hurhaay!!! \"#{options[1]}\" was successfully executed!".center(75)+"#"
       puts message.color(Colors::GREEN)
       puts "#                                                                           #".color(Colors::GREEN)
       puts "#############################################################################".color(Colors::GREEN)
-      end
-      if options.first == "s"
-        system "ruby #{ROOT}/datasets/#{options[1].downcase}.selector.rb"
-      end
     end
   end
 end
