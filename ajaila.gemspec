@@ -11,6 +11,11 @@ Gem::Specification.new do |s|
   s.summary = %q{datamining framework}
   s.description = %q{Develop your datamining project following Agile practices}
   s.rubyforge_project = "ajaila"
-  s.files = ["bin/ajaila"]
   s.executables = ["ajaila"]
+  s.add_dependency("rio")
+  s.add_dependency("gli")
+  s.add_dependency("tilt")
+  s.add_dependency("liquid")
+  s.add_dependency("foreman")
+  s.add_dependency("sinatra")
 end
