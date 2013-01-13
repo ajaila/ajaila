@@ -2,10 +2,10 @@ import "{{ file }}"
 
 # {{ collection }}.collection.remove
 
-CSV.foreach {{file_name}} do |row|{% for column in columns %}
-  {{ column }} = row[0]
-  {% endfor %}{{ last }} = row[0]
-  {{ collection }}.create({% for column in columns %}{{ column }}: {{ column }}, {% endfor %}{{ last }}: {{ last }})
-end
+# CSV.foreach {{file_name}} do |row|{% for column in columns %}
+#   {{ column }} = row[0]
+#   {% endfor %}{{ last }} = row[0]
+#   {{ collection }}.create({% for column in columns %}{{ column }}: {{ column }}, {% endfor %}{{ last }}: {{ last }})
+# end
 
 # {{ collection }}.first(10).each { |test| puts "#{test}"}
