@@ -94,7 +94,8 @@ command :g do |c|
     end
 
     dir = target_dir(args)
-    File.open(ROOT + "/#{dir}#{args[1].downcase}.#{args[0]}.rb", 'w') {|f| f.write(content) } if args[0] != "api"
+    File.open(ROOT + "/#{dir}#{args[1].downcase}.#{args[0]}.rb", 'w') {|f| f.write(content) }
+    File.open(ROOT + "/sandbox/helpers/#{args[1].downcase}.helper.rb", 'w') {|f| f.write("") } if args[0] == "miner"
     puts success("Generated #{args[0]} #{args[1]} successfully!")    
   end
 end

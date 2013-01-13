@@ -1,14 +1,5 @@
 def build_block(text)
-  output = "\nAjaila: " + text
-#   %Q{
-# #############################################################################
-# #                                                                           # }
-#   text.split("\n").each do |line|
-#   	output += "\n#"+line.center(75)+"#"
-#   end
-#   output += %Q{
-# #                                                                           #
-# ############################################################################# }
+  output = "Ajaila: " + text
   return output
 end
 
