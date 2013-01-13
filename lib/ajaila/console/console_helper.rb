@@ -1,5 +1,6 @@
 KNOWN_INSTANCES = ["miner","selector","presenter","table","api"]
 KNOWN_CLASSES = ["Array", "Float", "Hash", "Integer", "NilClass", "Object", "String", "Time", "Binary", "Boolean", "Date", "ObjectId", "Set"]
+TEMPLATES = File.expand_path( "../generator_templates", __FILE__)
 
 def check_inputs(args)
   raise TypeError, warning("Nothing to generate...") if args == []
@@ -33,15 +34,10 @@ def parse_columns(columns)
     raise TypeError, warning("Wrong format of table parameters\n(name:String/Integer/Date/etc)") if KNOWN_CLASSES.include?(params[1].capitalize) == false
     pairs << [params[0].downcase, params[1].capitalize]
   end
+  return pairs
 end
 
-        # collection = args[1].capitalize
-        # key_pairs = []
-        # keys.each do |key_string|
-        #   params = key_string.split(':')
-        #   key_name = params[0]
-        #   key_type = params[1]
-        #   known_types = ["Array", "Float", "Hash", "Integer", "NilClass", "Object", "String", "Time", "Binary", "Boolean", "Date", "ObjectId", "Set"]
-        #   raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW) if known_types.include?(key_type.capitalize) == false
-        #   key_pairs << [key_name.downcase, key_type.capitalize]
-        # end
+def render(template, *params)
+  puts *params
+  Tilt.new(TEMPLATES + "/" + template + ".liquid").render(nil, *params)
+end

@@ -1,18 +1,13 @@
-GEN_TEMPLATES = File.expand_path( "../generator_templates", __FILE__)
 # generating miners,selectors,tables and presenters 
 command :g do |c|
   c.action do |global_options,options,args|
     check_inputs(args)
  
     if args[0] == "table"
-     # begin
         columns = additional_params(args)
         collection = args[1].capitalize
         key_pairs = parse_columns(columns)
-        content = Tilt.new(GEN_TEMPLATES+"/table.liquid").render(nil, :collection => collection, :keys => key_pairs)
-     # rescue
-     #   raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW)
-    #  end
+        content = render("table", :collection => collection, :keys => key_pairs)
     end
 
 
