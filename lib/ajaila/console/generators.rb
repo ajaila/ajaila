@@ -8,7 +8,7 @@ command :g do |c|
     known_instances = ["miner","selector","presenter","table","api"]
     raise TypeError, 'Ajaila: unknown command...'.color(Colors::YELLOW) if args == nil
   	instance_type = args[0]
-  	raise TypeError, 'Ajaila: unknown instance (ex. miner SomeMiner, selector SomeSelector, presenter SomePresenter, table SomeTable)'.color(Colors::YELLOW) if known_instances.include?(instance_type) == false
+  	raise TypeError, success("Unknown instance (ex. miner SomeMiner, selector SomeSelector,\n presenter SomePresenter, table SomeTable)") if known_instances.include?(instance_type) == false
     begin
       raise TypeError, 'Ajaila: unknown command...'.color(Colors::YELLOW) if args[1] == nil
       instance_name = args[1]

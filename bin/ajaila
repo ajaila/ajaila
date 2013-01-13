@@ -8,6 +8,7 @@ require "liquid"
 require "tilt"
 
 require "ajaila/console/styling"
+require "ajaila/console/messager"
 require "ajaila/root_definer"
 require "ajaila/console/initializers"
 require "ajaila/console/generators"

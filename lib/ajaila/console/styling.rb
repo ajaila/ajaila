@@ -8,6 +8,7 @@ class Colors
    INFO = "\e[0;36;1m"
    WARNING = "\e[1;33;1m"
    ERROR = "\e[1;31;1m"
+   SUCCESS = "\e[2;32;1m"
 end
 class String
    def color(color)
