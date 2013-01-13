@@ -26,19 +26,19 @@ command :run do |c|
 
       if options.first == "m"
         miners = []
-        Dir[ROOT + "/sandbox/miners/*"].each do |miner|
+        Dir[ROOT + "/sandbox/miners/*.miner.rb"].each do |miner|
           miners << File.basename(miner).downcase.split(".").first
-        end
-        puts "#{miners}"
+        end 
         error = %Q{
 #############################################################################
 #                                                                           # }
-        error += "\n#"+"MINER \"#{options[1]}\" DOESN'T EXIST".center(75)+"#"
+        error += "\n#"+"ERROR: MINER \"#{options[1]}\" DOESN'T EXIST".center(75)+"#"
+        error += "\n#"+"To create miner type: ajaila g m:#{options[1]}".center(75)+"#"
         error += %Q{
 #                                                                           #
 #############################################################################
                 }
-        raise error.color(Colors::WARNING) if miners.include?(options[1].downcase) == false        
+        raise error.color(Colors::WARNING) if miners == [] or miners.include?(options[1].downcase) == false        
         puts "#############################################################################".color(Colors::INFO)
         puts "#                                                                           #".color(Colors::INFO)
         message = "#"+"STATUS: Running Miner \"#{options[1]}\". Just a few seconds...".center(75)+"#"
@@ -47,6 +47,20 @@ command :run do |c|
         puts "#############################################################################".color(Colors::INFO)
       end
       if options.first == "s"
+        selectors = []
+        Dir[ROOT + "/datasets/*.selector.rb"].each do |miner|
+          selectors << File.basename(miner).downcase.split(".").first
+        end
+        error = %Q{
+#############################################################################
+#                                                                           # }
+        error += "\n#"+"ERROR: SELECTOR \"#{options[1]}\" DOESN'T EXIST".center(75)+"#"
+        error += "\n#"+"To create selector type: ajaila g s:#{options[1]}".center(75)+"#"
+        error += %Q{
+#                                                                           #
+#############################################################################
+                }
+        raise error.color(Colors::WARNING) if selectors == [] or selectors.include?(options[1].downcase) == false
         puts "#############################################################################".color(Colors::INFO)
         puts "#                                                                           #".color(Colors::INFO)
         message = "#"+"STATUS: Running Selector \"#{options[1]}\". Just a few seconds...".center(75)+"#"
@@ -60,7 +74,6 @@ command :run do |c|
     # puts "global: #{global_options}"
     # puts "command: #{command}"
     # puts "options: #{options}"
-    puts "args: #{args}"
     if args == []
       system "foreman start"
     else
@@ -69,7 +82,7 @@ command :run do |c|
         system "ruby #{ROOT}/sandbox/miners/#{options[1].downcase}.miner.rb"
       end
       if options.first == "s"
-        dir = ""
+        system "ruby #{ROOT}/datasets/#{options[1].downcase}.selector.rb"
       end
     end
   end
