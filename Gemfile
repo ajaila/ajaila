@@ -5,6 +5,8 @@ group :test do
   gem 'rspec'
 end
 
-gem 'rio'
-gem 'gli'
-gem 'rdoc'
+gem "rio"
+gem "gli"
+gem "rdoc"
+gem "tilt"
+gem "liquid"

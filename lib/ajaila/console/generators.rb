@@ -1,5 +1,7 @@
+$:.unshift File.expand_path( "../generator_templates", __FILE__)
+puts File.expand_path( "../generator_templates", __FILE__)
 # generating miners,selectors,tables and presenters 
-command :generate do |c|
+command :g do |c|
   c.action do |global_options,options,args|
   	root = true if Dir['*/'].include?("sandbox/") and Dir['*/'].include?("datasets/")
   	raise TypeError, 'Ajaila: please, run commands from the root directory'.color(Colors::YELLOW) if root != true

@@ -1,9 +1,11 @@
 #!/usr/bin/env ruby
 $:.unshift File.expand_path("../../lib", __FILE__)
-require 'rubygems'
-require 'gli'
+require "rubygems"
+require "gli"
 include GLI::App
-require 'rio'
+require "rio"
+require "liquid"
+require "tilt"
 
 require "ajaila/console/styling"
 require "ajaila/root_definer"

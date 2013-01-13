@@ -21,7 +21,6 @@ end
 def find_root(path)
   path = File.expand_path('..', path) if root?(path) == false
   find_root(path) if root?(path) == false
-  puts path
   return path if root?(path) == true
 end
 
@@ -38,5 +37,3 @@ rescue SystemStackError
                 }
     raise error.color(Colors::WARNING)
 end
-
-puts ROOT

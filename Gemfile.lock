@@ -4,6 +4,7 @@ GEM
     diff-lcs (1.1.3)
     gli (2.5.3)
     json (1.7.6)
+    liquid (2.4.1)
     rake (10.0.3)
     rdoc (3.12)
       json (~> 1.4)
@@ -19,13 +20,16 @@ GEM
       diff-lcs (~> 1.1.3)
     rspec-mocks (2.12.1)
     test-unit (2.5.3)
+    tilt (1.3.3)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
   gli
+  liquid
   rake
   rdoc
   rio
   rspec
+  tilt
