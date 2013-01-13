@@ -1,68 +1,22 @@
-TEMPLATES = File.expand_path( "../generator_templates", __FILE__)
+GEN_TEMPLATES = File.expand_path( "../generator_templates", __FILE__)
 # generating miners,selectors,tables and presenters 
 command :g do |c|
   c.action do |global_options,options,args|
-  	root = true if Dir['*/'].include?("sandbox/") and Dir['*/'].include?("datasets/")
-  	raise TypeError, 'Ajaila: please, run commands from the root directory'.color(Colors::YELLOW) if root != true
-    known_instances = ["miner","selector","presenter","table","api"]
-    raise TypeError, 'Ajaila: unknown command...'.color(Colors::YELLOW) if args == nil
-  	instance_type = args[0]
-  	raise TypeError, success("Unknown instance (ex. miner SomeMiner, selector SomeSelector,\n presenter SomePresenter, table SomeTable)") if known_instances.include?(instance_type) == false
-    begin
-      raise TypeError, 'Ajaila: unknown command...'.color(Colors::YELLOW) if args[1] == nil
-      instance_name = args[1]
-     rescue
-      raise TypeError, 'Ajaila: define instance name (use only A-Z and a-z symbols)'.color(Colors::YELLOW) #if instance_name == nil
-    end
-    raise TypeError, 'Ajaila: wrong format for the instance name (use only A-Z and a-z symbols)'.color(Colors::YELLOW) if instance_name[/^[A-Z]+$/i] == nil
-    puts "\tGenerating #{instance_type} #{instance_name}"
-    dir = "datasets/" if instance_type == "selector"
-    dir = "sandbox/miners/" if instance_type == "miner"
-    dir = "sandbox/presenters/" if instance_type == "presenter"
-    dir = "sandbox/tables/" if instance_type == "table"
-
-    #content = "Uncle Tom\nwas singing in the dorm!"
-    ext = "rb"
-    if instance_type == "table"
-      k, keys = 0, []
-      args.each do |arg|
-        k += 1
-        next if k <= 2
-        keys << arg
-      end
-      raise TypeError, 'Ajaila: define table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW) if keys == nil
-      content = ""
-
-# >> template = Tilt.new('table.liquid')
-# => #<Tilt::LiquidTemplate @file='hello.liquid'>
-# >> scope = { :title => "Hello Liquid Templates" }
-# >> template.render(nil, :world => "Liquid")
-      
-      begin
-        collection = instance_name.capitalize
-        key_pairs = []
-        keys.each do |key_string|
-          params = key_string.split(':')
-          key_name = params[0]
-          key_type = params[1]
-          known_types = ["Array", "Float", "Hash", "Integer", "NilClass", "Object", "String", "Time", "Binary", "Boolean", "Date", "ObjectId", "Set"]
-          raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW) if known_types.include?(key_type.capitalize) == false
-          key_pairs << [key_name.downcase, key_type.capitalize]
-        end
-        content = Tilt.new(TEMPLATES+"/table.liquid").render(nil, :collection => collection, :keys => key_pairs)
-        # lines = []
-        # lines << "MongoMapper.database = \"ajaila_db\"\n"
-        # lines << "class #{instance_name.capitalize}\n  include MongoMapper::Document\n"
-
-        # lines << "end\n"
-    #    content = lines.join
-      rescue
-        raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW)
-      end
+    check_inputs(args)
+ 
+    if args[0] == "table"
+     # begin
+        columns = additional_params(args)
+        collection = args[1].capitalize
+        key_pairs = parse_columns(columns)
+        content = Tilt.new(GEN_TEMPLATES+"/table.liquid").render(nil, :collection => collection, :keys => key_pairs)
+     # rescue
+     #   raise TypeError, 'Ajaila: wrong format of table parameters (name:String/Integer/Date/etc)'.color(Colors::YELLOW)
+    #  end
     end
 
 
-    if instance_type == "selector"
+    if args[0] == "selector"
       begin
          using = false
          k, files, tables  = 0, [], []
@@ -142,7 +96,7 @@ command :g do |c|
       end
     end
 
-    if instance_type == "miner"
+    if args[0] == "miner"
       begin
          using = false
          k, tables  = 0, []
@@ -192,7 +146,7 @@ command :g do |c|
       end
     end
     
-    if instance_type == "presenter"
+    if args[0] == "presenter"
       begin
          ext = "erb"
          using = false
@@ -233,8 +187,8 @@ command :g do |c|
 
          route = []
          route << "\n"
-         route << "get \"/#{instance_name.downcase}\" do\n"
-         route << "  erb \"#{instance_name.downcase}.presenter\".to_sym\n"
+         route << "get \"/#{args[1].downcase}\" do\n"
+         route << "  erb \"#{args[1].downcase}.presenter\".to_sym\n"
          route << "end\n"
          File.open("service.rb", "a") do |file|
            file.puts route
@@ -250,7 +204,7 @@ command :g do |c|
       end
     end
 
-    if instance_type == "api"
+    if args[0] == "api"
       begin
          using = false
          k, tables  = 0, []
@@ -280,7 +234,7 @@ command :g do |c|
            end
            table_data.each_key do |table|
              table_data[table].each do |key|
-               route << "\nget '/api/#{instance_name.downcase}/#{key}/:key' do\n"
+               route << "\nget '/api/#{args[1].downcase}/#{key}/:key' do\n"
                route << "  data = #{table}.where(:#{key} => params[:key] )\n"
                route << "  if data\n"
                route << "    data.to_json\n"
@@ -305,9 +259,10 @@ command :g do |c|
         raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
       end
     end
-
-    File.open("#{dir}#{instance_name.downcase}.#{instance_type}.#{ext}", 'w') {|f| f.write(content) } if instance_type != "api"
-    puts "\tGenerated #{instance_type} #{instance_name} successfully!".color(Colors::GREEN)
+    puts info("Generating #{args[0]} \"#{args[1]}\"")
+    dir = target_dir(args)
+    File.open(ROOT + "/#{dir}#{args[1].downcase}.#{args[0]}.rb", 'w') {|f| f.write(content) } if args[0] != "api"
+    puts "\tGenerated #{args[0]} #{args[1]} successfully!".color(Colors::GREEN)
     
   end
 

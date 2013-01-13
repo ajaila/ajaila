@@ -5,10 +5,10 @@ class Colors
    DARKGREEN = "\e[0;32;40m"
    YELLOW = "\e[1;33;40m"
    DARKCYAN = "\e[0;36;40m"
-   INFO = "\e[0;36;1m"
-   WARNING = "\e[1;33;1m"
-   ERROR = "\e[1;31;1m"
-   SUCCESS = "\e[2;32;1m"
+   INFO = "\033[34m" #{}"\e[0;36;1m"
+   WARNING = "\033[33m"
+   ERROR = "\033[31m"
+   SUCCESS = "\033[32m"
 end
 class String
    def color(color)
