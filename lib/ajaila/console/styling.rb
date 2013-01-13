@@ -6,7 +6,8 @@ class Colors
    YELLOW = "\e[1;33;40m"
    DARKCYAN = "\e[0;36;40m"
    INFO = "\e[0;36;1m"
-
+   WARNING = "\e[1;33;1m"
+   ERROR = "\e[1;31;1m"
 end
 class String
    def color(color)
