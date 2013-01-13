@@ -11,7 +11,3 @@ def import(file)
   path_with_file = ROOT+"/datasets/raw/"+file
   Object.const_set(input, path_with_file)  
 end
-
-# import("in.csv")
-
-# CSV.foreach(IN) do |row|
