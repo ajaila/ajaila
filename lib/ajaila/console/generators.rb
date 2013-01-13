@@ -24,53 +24,64 @@ command :g do |c|
     end
 
     if args[0] == "miner"
-      begin
-         using = false
-         k, tables  = 0, []
-         args.each do |arg|
-           k += 1
-           using = true if arg == "using" and k == 3
-           next if k <= 3
-           additions = arg.split(':')
-           addition_type = additions[0].downcase
-           addition_core = additions[1].downcase
-           tables << addition_core if addition_type == "table"
-         end
-         content = ""
-         lines = []
-         table_data = {}
-         if tables != []
-           lines << "require \"mongo_mapper\"\n"
-           tables.each do |table|
-             lines << "require \"./sandbox/tables/#{table}.table\"\n"
-             File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
-               while (line = infile.gets)
-                 clas = line[/class\s(\S+)/,1] if clas == nil
-                 key = line[/key\s:(\S+),/,1]
-                 table_data[clas] = [] if clas != nil and table_data[clas] == nil
-                 table_data[clas] << key if key != nil
-               end
-             end
-           end
-
-           table_data.each_key do |table|
-             lines << "  #{table}.create("
-             table_data[table].each do |key|
-               lines << "#{key}: #{key}, " if key != table_data[table].last
-               lines << "#{key}: #{key}" if key == table_data[table].last
-             end
-             lines << ")\n"
-           end
-         end
-
-        if using == true
-         puts "Ajaila: No selector title or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == [] 
-         raise TypeError if tables == [] 
-        end
-         content = lines.join
-       rescue
-        raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
+      content = render("miner", :miner => args[1].downcase)
+      io = additional_params(args)
+      get_tables(io).each do |table|
+        all_columns = get_columns(table)
+        clast = all_columns.pop
+        cleft = all_columns
+        content += "\n" + render( "_input", :columns => cleft, :last => clast, 
+                                            :collection => table.capitalize )
+        content += "\n" + render( "_output", :columns => cleft, :last => clast, 
+                                             :collection => table.capitalize )
       end
+      # begin
+      #    using = false
+      #    k, tables  = 0, []
+      #    args.each do |arg|
+      #      k += 1
+      #      using = true if arg == "using" and k == 3
+      #      next if k <= 3
+      #      additions = arg.split(':')
+      #      addition_type = additions[0].downcase
+      #      addition_core = additions[1].downcase
+      #      tables << addition_core if addition_type == "table"
+      #    end
+      #    content = ""
+      #    lines = []
+      #    table_data = {}
+      #    if tables != []
+      #      lines << "require \"mongo_mapper\"\n"
+      #      tables.each do |table|
+      #        lines << "require \"./sandbox/tables/#{table}.table\"\n"
+      #        File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
+      #          while (line = infile.gets)
+      #            clas = line[/class\s(\S+)/,1] if clas == nil
+      #            key = line[/key\s:(\S+),/,1]
+      #            table_data[clas] = [] if clas != nil and table_data[clas] == nil
+      #            table_data[clas] << key if key != nil
+      #          end
+      #        end
+      #      end
+
+      #      table_data.each_key do |table|
+      #        lines << "  #{table}.create("
+      #        table_data[table].each do |key|
+      #          lines << "#{key}: #{key}, " if key != table_data[table].last
+      #          lines << "#{key}: #{key}" if key == table_data[table].last
+      #        end
+      #        lines << ")\n"
+      #      end
+      #    end
+
+      #   if using == true
+      #    puts "Ajaila: No selector title or table was selected \n( add: using file:SomeFile.csv table:SomeTable )".color(Colors::YELLOW) if files == [] or tables == [] 
+      #    raise TypeError if tables == [] 
+      #   end
+      #    content = lines.join
+      #  rescue
+      #   raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
+      # end
     end
     
     if args[0] == "presenter"
@@ -131,61 +142,6 @@ command :g do |c|
       end
     end
 
-    if args[0] == "api"
-      begin
-         using = false
-         k, tables  = 0, []
-         route = []
-         args.each do |arg|
-           k += 1
-           using = true if arg == "using" and k == 3
-           next if k <= 3
-           additions = arg.split(':')
-           addition_type = additions[0].downcase
-           addition_core = additions[1].downcase
-           tables << addition_core if addition_type == "table"
-         end
-         content = ""
-         lines = []
-         table_data = {}
-         if tables != []
-           tables.each do |table|
-             File.open("sandbox/tables/#{table}.table.rb", "r") do |infile|
-               while (line = infile.gets)
-                 clas = line[/class\s(\S+)/,1] if clas == nil
-                 key = line[/key\s:(\S+),/,1]
-                 table_data[clas] = [] if clas != nil and table_data[clas] == nil
-                 table_data[clas] << key if key != nil
-               end
-             end
-           end
-           table_data.each_key do |table|
-             table_data[table].each do |key|
-               route << "\nget '/api/#{args[1].downcase}/#{key}/:key' do\n"
-               route << "  data = #{table}.where(:#{key} => params[:key] )\n"
-               route << "  if data\n"
-               route << "    data.to_json\n"
-               route << "   else\n"
-               route << "     error 404, {:error => \"item not found\"}.to_json\n"
-               route << "  end\n"
-               route << "end\n"
-             end
-           end
-         end
-         route.join
-         File.open("service.rb", "a") do |file|
-           file.puts route
-         end
-
-        if using == true
-         puts "Ajaila: No api title or table was selected \n".color(Colors::YELLOW) if tables == [] 
-         raise TypeError if tables == [] 
-        end
-         content = lines.join
-       rescue
-        raise TypeError, 'Ajaila: wrong command...'.color(Colors::RED)
-      end
-    end
     # puts info("Generating #{args[0]} \"#{args[1]}\"")
     dir = target_dir(args)
     File.open(ROOT + "/#{dir}#{args[1].downcase}.#{args[0]}.rb", 'w') {|f| f.write(content) } if args[0] != "api"
