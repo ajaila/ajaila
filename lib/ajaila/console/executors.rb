@@ -1,7 +1,7 @@
 command :run do |c|
   c.action do |global_options,options,args|
     if args == []
-      puts info("STATUS: Running Ajaila Environment. Just a few seconds...")
+      puts info("Running Ajaila Environment. Just a few seconds...")
     else
 
       options = args #[0].split(":")
