@@ -1,7 +1,7 @@
 # generating miners, selectors, tables and presenters 
 command :g do |c|
   c.action do |global_options,options,args|
-
+    set_root
     check_inputs(args)
     content = ""
     if args[0] == "table"

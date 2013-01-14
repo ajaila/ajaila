@@ -24,16 +24,10 @@ def find_root(path)
   return path if root?(path) == true
 end
 
-begin
-  ROOT = find_root(Dir::pwd)
-rescue SystemStackError
-    error = %Q{
-#############################################################################
-#                                                                           #
-#                   PLEASE, GO THE DIRECTORY OF YOUR APP                    #
-#                             Type: cd YourApp                              #
-#                                                                           #
-#############################################################################
-                }
-    raise error.color(Colors::WARNING)
-end
+def set_root
+  begin
+    Object.const_set("ROOT", find_root(Dir::pwd))
+  rescue SystemStackError
+    raise error("PLEASE, GO THE DIRECTORY OF YOUR APP")
+  end
+end 

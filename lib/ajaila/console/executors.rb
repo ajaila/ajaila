@@ -1,5 +1,6 @@
 command :run do |c|
   c.action do |global_options,options,args|
+    set_root
     if args == []
       puts info("Running Ajaila Environment. Just a few seconds...")
     else
