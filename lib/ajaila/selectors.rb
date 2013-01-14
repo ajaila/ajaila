@@ -8,7 +8,5 @@ require "db"
 require "application.helper"
 
 def import(file)
-  input = file.split(".").first.upcase
-  path_with_file = ROOT+"/datasets/raw/"+file
-  Object.const_set(input, path_with_file)  
+  ROOT+"/datasets/raw/"+file
 end
