@@ -1,3 +1,2 @@
 
-# {{ collection }}.collection.remove
-# {{ collection }}.create({% for column in columns %}{{ column }}: {{ column }}, {% endfor %}{{ last }}: {{ last }})
+{{ collection }}.create({% for column in columns %}{{ column }}: {{ column }}, {% endfor %}{{ last }}: {{ last }})

@@ -1,7 +1,5 @@
 
-# {{ collection }}.all.each do |el|{% for column in columns %}
-#  {{ column }} = el.{{ column }}{% endfor %}
-#  {{ last }} = el.{{ last }}
-# end
-
-# {{ collection }}.first(10).each { |test| puts "#{test}" }
+{{ collection }}.all.each do |el|{% for column in columns %}
+  {{ column }} = el.{{ column }}{% endfor %}
+  {{ last }} = el.{{ last }}
+end
