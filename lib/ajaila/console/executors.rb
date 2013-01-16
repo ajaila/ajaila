@@ -30,12 +30,16 @@ command :run do |c|
       end
     end  
   end
-  post do |global_options,command,options,args|
+end
+
+post do |global_options,command,options,args|
+  if command.name == :run
     if args == []
       system "foreman start"
     else
       options = args
       if options.first == "miner"
+
         system "ruby #{ROOT}/sandbox/miners/#{options[1].downcase}.miner.rb"
       end
       if options.first == "selector"

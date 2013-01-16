@@ -38,8 +38,8 @@ command :g do |c|
     if args[0] == "presenter"
       raise TypeError, warning("Presenters are not available, sorry")
     end
-
-    dir = target_dir(args)
+    instance = args[0]
+    dir = target_dir(instance)
     File.open(ROOT + "/#{dir}#{args[1].downcase}.#{args[0]}.rb", 'w') {|f| f.write(content) }
     File.open(ROOT + "/sandbox/helpers/#{args[1].downcase}.helper.rb", 'w') {|f| f.write("") } if args[0] == "miner"
     puts success("Generated #{args[0]} #{args[1]} successfully!")    

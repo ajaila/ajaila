@@ -20,4 +20,6 @@ Gem::Specification.new do |s|
   s.add_dependency("foreman")
   s.add_dependency("sinatra")
   s.add_dependency("mongo_mapper")
+  s.add_dependency("rubyvis")
+  s.add_development_dependency("aruba", '~> 0.4.6')
 end

@@ -21,11 +21,11 @@ def additional_params(args)
   return keys
 end
 
-def target_dir(args)
-  return "datasets/" if args[0] == "selector"
-  return "sandbox/miners/" if args[0] == "miner"
-  return "sandbox/presenters/" if args[0] == "presenter"
-  return "sandbox/tables/" if args[0] == "table"
+def target_dir(instance)
+  return "datasets/" if instance == "selector"
+  return "sandbox/miners/" if instance == "miner"
+  return "sandbox/presenters/" if instance == "presenter"
+  return "sandbox/tables/" if instance == "table"
 end
 
 def parse_columns(columns)
@@ -88,3 +88,9 @@ def get_columns(table)
   raise TypeError, warning("Could not open \"#{table}\". There is something wrong with it.") if columns == []
   return columns
 end
+
+# def get_instances(type)
+#   instances = []
+
+
+# end
