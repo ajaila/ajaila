@@ -10,7 +10,7 @@ command :tables do |c|
     puts "These are the app tables:"
     tables, ind = {}, 1
     Dir.glob(ROOT + "/sandbox/tables/*.rb").each do |table|
-      tables[ind] = table.split("/").last.split(".").first
+      tables[ind] = Ajaila::ConsoleHelper.file_to_name(table.split("/").last.split(".").first)
       ind += 1
     end
     tables[0] = "There are no tables" if tables == {}
@@ -26,7 +26,7 @@ command :miners do |c|
     puts "These are the app miners:"
     miners, ind = {}, 1
     Dir.glob(ROOT + "/sandbox/miners/*.rb").each do |miner|
-      miners[ind] = miner.split("/").last.split(".").first
+      miners[ind] = Ajaila::ConsoleHelper.file_to_name(miner.split("/").last.split(".").first)
       ind += 1
     end
     miners[0] = "There are no miners" if miners == {}
@@ -42,7 +42,7 @@ command :selectors do |c|
     puts "These are the app selectors:"
     selectors, ind = {}, 1
     Dir.glob(ROOT + "/datasets/*.selector.rb").each do |selector|
-      selectors[ind] = selector.split("/").last.split(".").first
+      selectors[ind] = Ajaila::ConsoleHelper.file_to_name(selector.split("/").last.split(".").first)
       ind += 1
     end
     selectors[0] = "There are no selectors" if selectors == {}
@@ -57,7 +57,7 @@ command :presenters do |c|
     puts "These are the app presenters:"
     presenters, ind = {}, 1
     Dir.glob("sandbox/presenters/*.presenter.rb").each do |presenter|
-      presenters[ind] = presenter.split("/").last.split(".").first
+      presenters[ind] = Ajaila::ConsoleHelper.file_to_name(presenter.split("/").last.split(".").first)
       ind += 1
     end
     presenters[0] = "There are no presenters" if presenters == {}

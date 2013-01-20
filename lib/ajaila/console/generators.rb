@@ -6,7 +6,7 @@ command :g do |c|
     content = ""
     if args[0] == "table"
       columns = Ajaila::ConsoleHelper.additional_params(args)
-      collection = args[1].capitalize
+      collection = args[1]
       key_pairs = Ajaila::ConsoleHelper.parse_columns(columns)
       content = Ajaila::ConsoleHelper.render("table", :collection => collection, :keys => key_pairs)
     end
@@ -40,8 +40,10 @@ command :g do |c|
     end
     instance = args[0]
     dir = Ajaila::ConsoleHelper.target_dir(instance)
-    File.open(ROOT + "/#{dir}#{args[1].downcase}.#{args[0]}.rb", 'w') {|f| f.write(content) }
-    File.open(ROOT + "/sandbox/helpers/#{args[1].downcase}.helper.rb", 'w') {|f| f.write("") } if args[0] == "miner"
-    puts Ajaila::Messager.success("Generated #{args[0]} #{args[1]} successfully!")    
+    instance_title = args[1]
+    instance_file = Ajaila::ConsoleHelper.name_to_file(instance_title)
+    File.open(ROOT + "/#{dir}#{instance_file}.#{args[0]}.rb", 'w') {|f| f.write(content) }
+    File.open(ROOT + "/sandbox/helpers/#{instance_file}.helper.rb", 'w') {|f| f.write("") } if args[0] == "miner"
+    puts Ajaila::Messager.success("Generated #{instance} #{args[1]} successfully!")    
   end
 end

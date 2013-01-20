@@ -6,6 +6,8 @@ command :run do |c|
     else
 
       options = args #[0].split(":")
+      instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
+      instance_title = options[1]
       types = ["miner","selector"]
       message = "CHECK YOURSELF\n   To run ajaila environment: ajaila run\n   To run miner: ajaila run miner some_miner\n   To run selector: ajaila run selector some_selector"
       raise Ajaila::Messager.info(message) if types.include?(options.first) == false
@@ -13,20 +15,20 @@ command :run do |c|
       if options.first == "miner"
         miners = []
         Dir[ROOT + "/sandbox/miners/*.miner.rb"].each do |miner|
-          miners << File.basename(miner).downcase.split(".").first
+          miners << File.basename(miner).split(".").first
         end 
-        message = "MINER \"#{options[1]}\" DOESN'T EXIST\nTo create miner type: ajaila g miner"
-        raise Ajaila::Messager.warning(message) if miners == [] or miners.include?(options[1].downcase) == false        
-        puts Ajaila::Messager.info("Running Miner \"#{options[1]}\". Just a few seconds...")
+        message = "MINER \"#{instance_title}\" DOESN'T EXIST\nTo create miner type: ajaila g miner"
+        raise Ajaila::Messager.warning(message) if miners == [] or miners.include?(instance_file) == false        
+        puts Ajaila::Messager.info("Running Miner \"#{instance_title}\". Just a few seconds...")
       end
       if options.first == "selector"
         selectors = []
         Dir[ROOT + "/datasets/*.selector.rb"].each do |miner|
-          selectors << File.basename(miner).downcase.split(".").first
+          selectors << File.basename(miner).split(".").first
         end
-        warn = "SELECTOR \"#{options[1]}\" DOESN'T EXIST\nTo create selector type: ajaila g selector #{options[1]}"
-        raise Ajaila::Messager.warning(warn) if selectors == [] or selectors.include?(options[1].downcase) == false
-        puts Ajaila::Messager.info("Running Selector \"#{options[1]}\". Just a few seconds...")
+        warn = "SELECTOR \"#{instance_title}\" DOESN'T EXIST\nTo create selector type: ajaila g selector #{instance_title}"
+        raise Ajaila::Messager.warning(warn) if selectors == [] or selectors.include?(instance_file) == false
+        puts Ajaila::Messager.info("Running Selector \"#{instance_title}\". Just a few seconds...")
       end
     end  
   end
@@ -38,11 +40,13 @@ post do |global_options,command,options,args|
       system "foreman start"
     else
       options = args
+      instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
+      instance_title = options[1]
       if options.first == "miner"
-        system "ruby #{ROOT}/sandbox/miners/#{options[1].downcase}.miner.rb"
+        system "ruby #{ROOT}/sandbox/miners/#{instance_file}.miner.rb"
       end
       if options.first == "selector"
-        system "ruby #{ROOT}/datasets/#{options[1].downcase}.selector.rb"
+        system "ruby #{ROOT}/datasets/#{instance_file}.selector.rb"
       end
     end
   end

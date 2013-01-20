@@ -79,4 +79,13 @@ describe Ajaila do
     Ajaila::ConsoleHelper.name_to_file(c).should == "file_name_foo"
   end
 
+  it "should convert file to name" do
+    a = "file"
+    b = "file_name"
+    c = "file_name_noo"
+    Ajaila::ConsoleHelper.file_to_name(a).should == "File"
+    Ajaila::ConsoleHelper.file_to_name(b).should == "FileName"
+    Ajaila::ConsoleHelper.file_to_name(c).should == "FileNameNoo"
+  end
+
 end

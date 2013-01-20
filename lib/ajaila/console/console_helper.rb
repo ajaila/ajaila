@@ -112,14 +112,15 @@ module Ajaila
   ##
   # FileName => file_name, File => file
   def name_to_file(name)
-   # raise TypeError, Ajaila::Messager.warning("The name of variable should start with capital letter: \"table:MyTable\"")
-    return name.scan(/[A-Z][a-z]*/).map(&:downcase).join("_")
+    array = name.scan(/[A-Z][a-z]*/)
+    raise TypeError, Ajaila::Messager.warning("The name of variable should start with capital letter: \"table:MyTable\"") if array == []
+    return array.map(&:downcase).join("_")
   end
 
   ##
   # file_name => FileName, file => File
   def file_to_name(file)
-    return 0
+    return file.split("_").map(&:capitalize).join
   end
 
   end
