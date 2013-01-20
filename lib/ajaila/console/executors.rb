@@ -1,14 +1,14 @@
 command :run do |c|
   c.action do |global_options,options,args|
-    set_root
+    Ajaila::RootDefiner.set_root
     if args == []
-      puts info("Running Ajaila Environment. Just a few seconds...")
+      puts Ajaila::Messager.info("Running Ajaila Environment. Just a few seconds...")
     else
 
       options = args #[0].split(":")
       types = ["miner","selector"]
       message = "CHECK YOURSELF\n   To run ajaila environment: ajaila run\n   To run miner: ajaila run miner some_miner\n   To run selector: ajaila run selector some_selector"
-      raise info(message) if types.include?(options.first) == false
+      raise Ajaila::Messager.info(message) if types.include?(options.first) == false
 
       if options.first == "miner"
         miners = []
@@ -16,8 +16,8 @@ command :run do |c|
           miners << File.basename(miner).downcase.split(".").first
         end 
         message = "MINER \"#{options[1]}\" DOESN'T EXIST\nTo create miner type: ajaila g miner"
-        raise warning(message) if miners == [] or miners.include?(options[1].downcase) == false        
-        puts info("Running Miner \"#{options[1]}\". Just a few seconds...")
+        raise Ajaila::Messager.warning(message) if miners == [] or miners.include?(options[1].downcase) == false        
+        puts Ajaila::Messager.info("Running Miner \"#{options[1]}\". Just a few seconds...")
       end
       if options.first == "selector"
         selectors = []
@@ -25,8 +25,8 @@ command :run do |c|
           selectors << File.basename(miner).downcase.split(".").first
         end
         warn = "SELECTOR \"#{options[1]}\" DOESN'T EXIST\nTo create selector type: ajaila g selector #{options[1]}"
-        raise warning(warn) if selectors == [] or selectors.include?(options[1].downcase) == false
-        puts info("Running Selector \"#{options[1]}\". Just a few seconds...")
+        raise Ajaila::Messager.warning(warn) if selectors == [] or selectors.include?(options[1].downcase) == false
+        puts Ajaila::Messager.info("Running Selector \"#{options[1]}\". Just a few seconds...")
       end
     end  
   end
@@ -39,7 +39,6 @@ post do |global_options,command,options,args|
     else
       options = args
       if options.first == "miner"
-
         system "ruby #{ROOT}/sandbox/miners/#{options[1].downcase}.miner.rb"
       end
       if options.first == "selector"

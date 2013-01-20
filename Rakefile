@@ -1,6 +1,6 @@
 #!/usr/bin/env rake
-require 'cucumber'
-require 'cucumber/rake/task'
+# require 'cucumber'
+# require 'cucumber/rake/task'
 
 task :default => [:test]
 
@@ -19,7 +19,7 @@ task :cp do
 end
 
 
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = "features --format pretty -x"
-  t.fork = false
-end
+# Cucumber::Rake::Task.new(:features) do |t|
+#   t.cucumber_opts = "features --format pretty -x"
+#   t.fork = false
+# end

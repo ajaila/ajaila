@@ -1,5 +1,5 @@
-# require 'ajaila/something_cool'
+require 'ajaila/console/console_helper'
 
 module Ajaila
- # include SomethingCool
+ include ConsoleHelper
 end

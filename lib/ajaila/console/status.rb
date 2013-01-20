@@ -6,7 +6,7 @@ end
 
 command :tables do |c|
   c.action do |global_options,options,args|
-    set_root
+    Ajaila::RootDefiner.set_root
     puts "These are the app tables:"
     tables, ind = {}, 1
     Dir.glob(ROOT + "sandbox/tables/*.rb").each do |table|
@@ -22,7 +22,7 @@ end
 
 command :miners do |c|
   c.action do |global_options,options,args|
-    set_root
+    Ajaila::RootDefiner.set_root
     puts "These are the app miners:"
     miners, ind = {}, 1
     Dir.glob(ROOT + "sandbox/miners/*.rb").each do |miner|

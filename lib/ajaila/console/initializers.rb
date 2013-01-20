@@ -2,7 +2,7 @@
 command :new do |c|
   c.action do |global_options,options,args|
     app_name = args.first
-    raise TypeError, error("Ajaila: you should enter the name for your app!") if app_name == nil
+    raise TypeError, Ajaila::Messager.error("Ajaila: you should enter the name for your app!") if app_name == nil
     puts "Ajaila: generating new application \"#{app_name}\"".color(Colors::GREEN)
     app_root = Dir::pwd + "/" + app_name
     begin
@@ -33,19 +33,19 @@ command :new do |c|
     puts "\tprepared Tables folder in the Sandbox directory"
 
     # creating files
-    gemfile_content = render("core/gemfile")
+    gemfile_content = Ajaila::ConsoleHelper.render("core/gemfile")
     File.open(app_root+"/Gemfile", 'w') {|f| f.write(gemfile_content)}
     puts "\tprepared Gemfile"
           
-    service_content = render("core/service")
+    service_content = Ajaila::ConsoleHelper.render("core/service")
     File.open(app_root+"/service.rb", 'w') {|f| f.write(service_content)}
     puts "\tprepared Service"
 
-    service_content = render("core/procfile")
+    service_content = Ajaila::ConsoleHelper.render("core/procfile")
     File.open(app_root+"/Procfile", 'w') {|f| f.write(service_content)}
     puts "\tprepared Service"
 
-    db_content = render("core/db", :project => app_name.downcase)
+    db_content = Ajaila::ConsoleHelper.render("core/db", :project => app_name.downcase)
     File.open(app_root+"/config/db.rb", 'w') {|f| f.write(db_content)}
     puts "\tprepared database config"
 
