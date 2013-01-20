@@ -9,12 +9,10 @@ command :new do |c|
       Dir::mkdir(app_root)
       puts "\tcreated application root"
      rescue
-      raise TypeError, "Ajaila: try another name, \"#{app_name}\" folder already exists!".color(Colors::RED)
+      raise TypeError, Ajaila::Messager.error("Ajaila: try another name, \"#{app_name}\" folder already exists!")
     end
 
     # creating directories
-    Dir::mkdir("#{app_root}/assets")
-    puts "\tprepared Assets"
     Dir::mkdir("#{app_root}/config")
     puts "\tprepared Config"
     Dir::mkdir("#{app_root}/datasets")
@@ -30,7 +28,7 @@ command :new do |c|
     Dir::mkdir("#{app_root}/sandbox/tables")
     puts "\tprepared Tables folder in the Sandbox directory"
     Dir::mkdir("#{app_root}/sandbox/helpers")
-    puts "\tprepared Tables folder in the Sandbox directory"
+    puts "\tprepared Helpers folder in the Sandbox directory"
 
     # creating files
     gemfile_content = Ajaila::ConsoleHelper.render("core/gemfile")
@@ -43,7 +41,7 @@ command :new do |c|
 
     service_content = Ajaila::ConsoleHelper.render("core/procfile")
     File.open(app_root+"/Procfile", 'w') {|f| f.write(service_content)}
-    puts "\tprepared Service"
+    puts "\tprepared Procfile"
 
     db_content = Ajaila::ConsoleHelper.render("core/db", :project => app_name.downcase)
     File.open(app_root+"/config/db.rb", 'w') {|f| f.write(db_content)}
@@ -51,6 +49,13 @@ command :new do |c|
 
     File.open(app_root+"/sandbox/helpers/application.helper.rb", 'w') {|f| f.write("# Application Helper")}
     puts "\tprepared application helper"
+
+    puts Ajaila::Messager.info %q {
+        ------------------------------------\n
+         You can now specify your database\n 
+         name inside "config/db.rb"\n
+        ------------------------------------
+    }
 
   end
 end

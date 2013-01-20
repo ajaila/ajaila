@@ -42,8 +42,9 @@ command :g do |c|
     dir = Ajaila::ConsoleHelper.target_dir(instance)
     instance_title = args[1]
     instance_file = Ajaila::ConsoleHelper.name_to_file(instance_title)
+    helper_content = Ajaila::ConsoleHelper.render("helper", :miner => instance_title) if args[0] == "miner"
     File.open(ROOT + "/#{dir}#{instance_file}.#{args[0]}.rb", 'w') {|f| f.write(content) }
-    File.open(ROOT + "/sandbox/helpers/#{instance_file}.helper.rb", 'w') {|f| f.write("") } if args[0] == "miner"
+    File.open(ROOT + "/sandbox/helpers/#{instance_file}.helper.rb", 'w') {|f| f.write(helper_content) } if args[0] == "miner"
     puts Ajaila::Messager.success("Generated #{instance} #{args[1]} successfully!")    
   end
 end
