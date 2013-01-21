@@ -6,4 +6,4 @@
 [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
 
 ## TODO
-Refactor helper templates according to the new policy.
+Dashboard!
