@@ -29,7 +29,12 @@ module Ajaila
       next if k <= 2
       keys << arg
     end
-    raise TypeError, Ajaila::Messager.warning("\"#{args[1]}\" #{args[0]} needs additional parameters to be specified") if keys == []
+    if keys == []
+      raise TypeError, Ajaila::Messager.warning("\"#{args[1]}\" #{args[0]} should have table and file (ex. ajaila g selector Wow file:in.csv table:Output). Don't forget to put file inside datasets directory and generate table before that.") if args[0] == "selector"
+      raise TypeError, Ajaila::Messager.warning("\"#{args[1]}\" #{args[0]} should have tables for input and output (ex. ajaila g miner Foo table:FooTable table:Yamy)") if args[0] == "miner"
+      raise TypeError, Ajaila::Messager.warning("\"#{args[1]}\" #{args[0]} needs additional parameters to be specified") if args[0] == "presenter"
+      raise TypeError, Ajaila::Messager.warning("\"#{args[1]}\" #{args[0]} should have columns (ex. ajaila g table MyTable name:String age:Integer birth:Time)") if args[0] == "table"
+    end
     return keys
   end
 
@@ -99,7 +104,8 @@ module Ajaila
 
   def get_columns(table)
     columns = []
-    File.open(ROOT+"/sandbox/tables/#{table.downcase}.table.rb", "r") do |infile|
+    table = name_to_file(table)
+    File.open(ROOT+"/sandbox/tables/#{table}.table.rb", "r") do |infile|
       while (line = infile.gets)
         key = line[/key\s:(\S+),/,1]
         columns << key if key != nil

@@ -49,13 +49,12 @@ command :new do |c|
 
     File.open(app_root+"/sandbox/helpers/application.helper.rb", 'w') {|f| f.write("# Application Helper")}
     puts "\tprepared application helper"
-
-    puts Ajaila::Messager.info %q {
-        ------------------------------------\n
-         You can now specify your database\n 
-         name inside "config/db.rb"\n
+    message = '
         ------------------------------------
-    }
+         You can now specify your database
+          name inside "config/db.rb"
+        ------------------------------------ '
+    puts Ajaila::Messager.success (message)
 
   end
 end
