@@ -15,4 +15,3 @@ gem "foreman"
 gem "sinatra"
 gem "mongo_mapper"
 gem "rubyvis"
-gem 'sinatra-assetpack', :require => 'sinatra/assetpack'
