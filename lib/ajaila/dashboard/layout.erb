@@ -1,5 +1,5 @@
 <html><head>
-    <title>Ajaila Homepage</title>
+    <title>Project Dashboard | Ajaila</title>
     <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
     <link href="application.css" media="all" rel="stylesheet" type="text/css"><link href="bootstrap.css" media="all" rel="stylesheet" type="text/css">
   </head>
@@ -8,15 +8,15 @@
       <ul class="nav menu" style="float:left">
         <li class="bran">
           <a href="http://ajaila.github.com/">
-            Ajaila Dashboard
+            Ajaila
           </a>
           <span style="font-size:10px; font-family:Arial; color: yellow">beta</span>
         </li>
       </ul>
       <ul class="nav menu" style="float:right">
         <li class="page">
-          <a href="#">
-            Home
+          <a href="/">
+            Dashboard Home
           </a>
         </li>
       </ul>
@@ -28,10 +28,10 @@
         </div>
         <div class="span10" style="text-align: center">
           <div class="row header">
-            {{ application }} Dashboard
+            Project Dashboard
           </div>
           <div class="row descriptor">
-             Welcome! Here is the most valuable information about the project.
+             Charts, statistics and other usefull things.
           </div>
         </div>
       </div>
@@ -39,28 +39,9 @@
       <div class="docs">
         <div id="wrapper">
           <div class="span11 info">
-            <h1>Getting Started With Ajaila</h1>
-            <p>
-              After reading this you'll learn what Ajaila is, you'll 
-understand it's advantages in comparison with other datamining 
-frameworks and platforms.
+          	<p>
+              <%= yield %>   
             </p>
-            <p>
-              Moreover we'll explain you, how to use this powerfull tool in your day by day datamining activities.
-            </p>
-            <h2 id="introduction">Introduction</h2>
-            <p>
-              Ajaila name is the composition of two words: ajala and 
-agile. According to african mythology "Ajala" is the god of creation, 
-who lives in heaven and makes human faces from clay and chaos. And as 
-far as you most probably know "agile" describes a flexible approach to 
-software development, which expects you to split the workflow into 
-sustainable pieces. Therefore it shouldn't be surprising for you why 
-Ajaila is called like that. We are talking about datamining framework 
-which allows you to follow agile practices.
-<%= yield %>
-            </p>
-   
           </div>
         </div>
       </div>

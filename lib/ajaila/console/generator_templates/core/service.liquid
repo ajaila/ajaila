@@ -1,18 +1,4 @@
-require "rubygems"
+require "ajaila/presenters"
 require "sinatra"
-require "erb"
 
-set :views, settings.root + '/sandbox/presenters'
-
-helpers do
-  def partial template
-    erb template, :layout => false
-  end
-end
-
-set :public_folder, 'assets'
-
-get '/' do
-  "<h1>Yo!</h1>"
-end
-  
+Ajaila::Presenters.create_dashboard

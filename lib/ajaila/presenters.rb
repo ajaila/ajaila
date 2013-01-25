@@ -15,6 +15,7 @@ module Ajaila
   module Presenters
     self.extend Ajaila::Presenters
     def create_dashboard
+      set :port, 9500
       set :views, [ "#{ROOT}/sandbox/presenters", DIR ]
       helpers do
         def find_template(views, name, engine, &block)
@@ -22,6 +23,7 @@ module Ajaila
         end
       end
       set :public_folder, File.dirname(__FILE__) + '/dashboard/public'
+      build_routes
     end
 
     def presenters
@@ -36,8 +38,11 @@ module Ajaila
           erb :"#{p}.presenter"
         end
       end
+      get '/' do
+        erb :index
+      end
     end
-    
+
   end
 end
 
