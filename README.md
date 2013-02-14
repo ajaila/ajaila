@@ -34,4 +34,4 @@ Ajaila Datamining Sandbox v. 0.0.2
 ```
 
 ## Installation - Not a Ruby Developer
-Set up your environment and learn Ruby. I can post a detailed manual on request. Just create a new issue [here](https://github.com/mac-r/ajaila/issues).
+Set up your environment and learn Ruby. I can post a detailed manual on request. Just create a new issue [here](https://github.com/mac-r/ajaila/issues/new).
