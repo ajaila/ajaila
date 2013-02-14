@@ -1,4 +1,4 @@
-# Ajaila v. 0.0.2.
+# Ajaila v. 0.0.2. (yet unpublished at RubyGems)
 ## Datamining Framework
 [![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
 
