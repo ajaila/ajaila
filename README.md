@@ -20,17 +20,17 @@ There is no Ajaila 0.0.2 at RubyGems. Version 0.0.1 is a crap, don't install it.
 ```
 git clone https://github.com/mac-r/ajaila.git
 ```
-<br>
+
 Then build Gem from `ajaila.gemspec`
 ```
 gem build ajaila.gemspec
 ```
-<br>
+
 You'll have `ajaila-0.0.2.gem` inside Ajaila folder. This is a newly baked Gem, which can be installed with the Terminal command
 ```
 gem install ajaila-0.0.2.gem
 ```
-<br>
+
 After installing all dependencies you'll be able to check if everything went wright. After typing `ajaila` in the Terminal you should get
 ```
 Ajaila Datamining Sandbox v. 0.0.2
