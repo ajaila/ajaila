@@ -1,9 +1,6 @@
-## Ajaila Dev Center
-### I am currently improving everything and there is no stable version at all. Please, wait for the new release or help me out.
-
-[![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila)
-
-[![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
+# Ajaila
+## Datamining Framework
+[![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
 
 Ajaila name is the composition of two words: ajala and agile. According to african mythology "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. And as far as you most probably know "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework which allows you to follow agile practices.
 
