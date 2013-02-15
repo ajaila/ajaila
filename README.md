@@ -6,7 +6,8 @@ Ajaila name is the composition of two words: ajala and agile. According to afric
 
 Why are agile practices so important? Whether you are a software developer or research engineer, there is always someone interested in what you are doing. These people are stakeholders in a project you are working on. Demonstrating results on a regular basis is the crucial point, which allows to succeed. With Ajaila you can conduct R&D, split your datamining project into sustainable parts and show progress within each iteration. 
 
-## Installation - Ruby Developer
+# Installation 
+### Ruby Developer
 It's great to solve complex problems in a friendly environment. Are you already familiar with [Bundler](http://gembundler.com/), [RubyGems](https://rubygems.org/) and [RVM](https://rvm.io/)? That's cool! Current Ajaila version supports [Ruby 1.9.3](https://github.com/ruby/ruby). 
 
 Ajaila needs a database to work properly. I decided to use [MongoDB](http://www.mongodb.org/) as a default, because of [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) ([MongoMapper](http://mongomapper.com/)). [MongoDB](http://www.mongodb.org/) doesn't need [migrations](http://guides.rubyonrails.org/migrations.html) and I find it convenient. Feel free to contribute and make support of other databases.
@@ -33,7 +34,7 @@ After installing all dependencies you'll be able to check if everything went wri
 Ajaila Datamining Sandbox v. 0.0.2
 ```
 
-## Installation - Not a Ruby Developer
+### Not a Ruby Developer
 Set up your environment and learn Ruby. I can post a detailed manual on request. Just create a new issue [here](https://github.com/mac-r/ajaila/issues/new).
 
 # Architecture
