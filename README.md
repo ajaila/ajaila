@@ -1,4 +1,4 @@
-# Ajaila v. 0.0.2. (yet unpublished at RubyGems)
+# Ajaila v. 0.0.2 (yet unpublished at RubyGems)
 ## Datamining Framework
 [![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
 
@@ -35,3 +35,35 @@ Ajaila Datamining Sandbox v. 0.0.2
 
 ## Installation - Not a Ruby Developer
 Set up your environment and learn Ruby. I can post a detailed manual on request. Just create a new issue [here](https://github.com/mac-r/ajaila/issues/new).
+
+# Architecture
+The platform consists of two blocks. Among them: Datasets and Sandbox. They exist in the context of Ajaila Environment, which provides everything with a library of methods and allows to generate new instances (selectors, miners, tables, presenters). There is also a Dashboard, which aggregates all information about the particular project (dashboard allows to observe the content of all presenters inside the project).
+
+![Ajaila v.0.0.2 Architecture](https://raw.github.com/mac-r/ajaila-media/master/ajaila_002_architecture.png)
+
+## Datasets vs. Sandbox
+Datasets and Sandbox are split according to their usage frequency. 
+
+While [creating a new project](https://github.com/mac-r/ajaila/wiki/Starting-Project) we run selectors only once or at least they are built for that. Selectors parse CSV files and turn static data into dynamic one. 
+
+On the other hand everything in the Sandbox is changed much more often (miners, presenters, tables and even helpers). 
+
+I found this kind of approach valuable and hope that you'll get used to it and appreciate as well.
+
+## Datasets Explained
+After creating a new project just put all static files inside `datasets/raw`. For now there is only a CSV format supported within selectors. If you need some other format - just ask me for help by creating a new issue. 
+
+Selectors are the dwellers of Datasets folder. This dudes are very important. Let's look at the Sandbox decomposition: 
+
+`Sandbox` = `Sand` + `Box`
+
+Selectors simply fill an empty box within the data. As soon as `Sandbox` is ready we move to the next step of our workflow. Selectors get left behind and we are making a short bio for each Datasets dweller.
+
+### Datasets Residents
+| Residents        | Short Bio | Working With |
+| ------------- |:-------------:| -----:|
+| CSV Files      | Live inside `datasets/raw`. Keep all the data of the project in the static form. | Manually Placed |
+| Selectors      | Require table and file as an input. They know how to parse CSV files. | Generated via Terminal Command |
+
+
+
