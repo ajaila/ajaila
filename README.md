@@ -2,7 +2,7 @@
 ## Datamining Framework
 [![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
 
-Ajaila name is the composition of two words: ajala and agile. According to african mythology "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. And as far as you most probably know "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework which allows you to follow agile practices.
+Ajaila is the composition of two words: ajala and agile. According to african mythology, "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. As far as you most probably know, "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore, it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework, which allows you to follow agile practices.
 
 Why are agile practices so important? Whether you are a software developer or research engineer, there is always someone interested in what you are doing. These people are stakeholders in a project you are working on. Demonstrating results on a regular basis is the crucial point, which allows to succeed. With Ajaila you can conduct R&D, split your datamining project into sustainable parts and show progress within each iteration. 
 
