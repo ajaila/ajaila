@@ -45,20 +45,20 @@ The platform consists of two blocks. Among them: Datasets and Sandbox. They exis
 ## Datasets vs. Sandbox
 Datasets and Sandbox are split according to their usage frequency. 
 
-While [creating a new project](https://github.com/mac-r/ajaila/wiki/Starting-Project) we run selectors only once or at least they are built for that. Selectors parse CSV files and turn static data into dynamic one. 
+While [creating a new project](https://github.com/mac-r/ajaila/wiki/Starting-Project), we run selectors only once or at least they are built for that. Selectors parse CSV files and turn static pieces of data into dynamic ones.
 
-On the other hand everything in the Sandbox is changed much more often (miners, presenters, tables and even helpers). 
+On the other hand, everything in the Sandbox is changed much more often (miners, presenters, tables and even helpers). 
 
-I found this kind of approach valuable and hope that you'll get used to it and appreciate as well.
+I found this kind of approach valuable and hope that you'll get used to it and appreciate it as well.
 
 ## Datasets Explained
-After creating a new project just put all static files inside `datasets/raw`. For now there is only a CSV format supported within selectors. If you need some other format - just ask me for help by creating a new issue. 
+After creating a new project simply put all static files inside `datasets/raw`. For now there is only a CSV format supported within selectors. If you need some other format - just ask me to help by creating a new issue. 
 
 Selectors are the dwellers of Datasets folder. This dudes are very important. Let's look at the Sandbox decomposition: 
 
 `Sandbox` = `Sand` + `Box`
 
-Selectors simply fill an empty box within the data. As soon as `Sandbox` is ready we move to the next step of our workflow. Selectors get left behind and we are making a short bio for each Datasets dweller.
+Selectors simply fill an empty box within the data. As soon as `Sandbox` is ready we move to the next step of our workflow. Selectors are left behind and we are making a short bio for each Datasets dweller.
 
 #### Inside Selector
 We created a new project called SuperProject. Our mission is to analyze Cool Things, which are stored in the CSV file called `items.csv`. We put this file into `SuperProject/datasets/raw` directory.
@@ -74,9 +74,9 @@ The command should return a green message as the one below.
 Ajaila: Generated table CoolThings successfully!
 ```
 
-Now we have table `CoolThings` (with columns item, produced, cost, quantity), which will be described in the next paragraph.
+Now we have the table `CoolThings` (with columns item, produced, cost, quantity), which will be described in the next paragraph.
 
-After the table is created we can move further. Our new challenge is to create selector (called `ItemsExtractor`), but it's not a hard nut to crack.
+After the table is created, we can move further. Our new challenge is to create selector (called `ItemsExtractor`), but it's not a hard nut to crack.
 
 ```
 ~/DEMOS/SuperProject$ ajaila g selector ItemsExtractor file:items.csv table:CoolThings
@@ -114,10 +114,10 @@ Now we have `CoolThings`, which are a dynamic representation of `items.csv`.
 | Selectors | Require table and file as an input. They know how to parse CSV files. | Generated and executed via Terminal Command |
 
 ## Sandbox Explained
-Datasets are easier to understand, because Sandbox consists of more elements. As you can observe at the scheme above - there are Tables, Miners, Helpers and Presenters. Quit self-explanatory names, don't they?
+Datasets are easier to understand, because Sandbox consists of more elements. As you can observe at the scheme above, there are Tables, Miners, Helpers and Presenters. Quite self-explanatory names, aren't they?
 
 ### Tables
-After the selection process data is stored in the database. The access point for the data is a set of tables stored in the `sandbox/tables` folder. MongoDB gives us freedom not to generate migrations (that saves a lot of time). Additionally we can change any table add rewrite everything in a new way.
+After the selection process, data is stored in the database. The access point for the data is a set of tables stored in the `sandbox/tables` folder. MongoDB gives us freedom not to generate migrations (that saves a lot of time). Additionally, we can change any table or rewrite everything in a new way.
 
 Tables initialize new collections within the Mongomapper. Collections are available through selectors, miners and presenters. Helpers are not linked with Ajaila environment directly, but you can call collections and their methods. Helpers are usually a part of something (new helper gets generated within new miner).
 
