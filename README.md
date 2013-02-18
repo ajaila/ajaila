@@ -29,7 +29,7 @@ You'll have `ajaila-0.0.2.gem` inside Ajaila folder. This is a newly baked Gem, 
 gem install ajaila-0.0.2.gem
 ```
 
-After installing all dependencies you'll be able to check if everything went wright. After typing `ajaila` in the Terminal you should get
+After installing all dependencies you'll be able to check if everything went right. After typing `ajaila` in the Terminal you should get
 ```
 Ajaila Datamining Sandbox v. 0.0.2
 ```
