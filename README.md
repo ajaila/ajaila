@@ -1,6 +1,18 @@
 # Ajaila v. 0.0.2 (yet unpublished at RubyGems)
-## Datamining Framework
+## Modular DSL for Predictive Analysis
 [![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
+
+## Short Description
+
+The application helps you to work with static data, normalize the data into a common format and build the required data models.
+
+During your work the application is provided with usefull snippets and generators. Ajaila can be easily extended with common Machine Learning packages written in Ruby and C. Among supported libraries are Statsample, MadLib (EMC corporation) and Vowpal Wabbit (Yahoo! Research), online learning library based on stochastic gradient discent for classification problems and regression analysis.
+
+After prototyping you can deploy your application to the web and provide your predictive models with unstructured data from Hadoop via MapReduce, which is hidden from you behind classy ORM (Massive Record or Treasure Data Extensions).
+
+Ajaila helps you build long-lasting software and provides you with environment, which can be easily tested with RSpec. The platform is tested and can be trusted.
+
+## Introduction
 
 Ajaila is the composition of two words: ajala and agile. According to african mythology, "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. As far as you most probably know, "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore, it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework, which allows you to follow agile practices.
 
