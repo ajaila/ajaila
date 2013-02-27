@@ -2,15 +2,15 @@
 ## Modular DSL for Predictive Analysis
 [![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
 
-## Short Description
+## Abstract
 
-The application helps you to work with static data, normalize the data into a common format and build the required data models.
+The application helps you to work with static data, normalize the data into a common format and build the required data models. Additionally, you can visualize your data with [Protovis](http://mbostock.github.com/protovis/) / [Highcharts.js](http://www.highcharts.com/) and scale your service with [Hadoop](http://hadoop.apache.org/) ([HDFS](http://hadoop.apache.org/docs/stable/hdfs_user_guide.html)).
 
-During your work the application is provided with usefull snippets and generators. Ajaila can be easily extended with common Machine Learning packages written in Ruby and C. Among supported libraries are Statsample, MadLib (EMC corporation) and Vowpal Wabbit (Yahoo! Research), online learning library based on stochastic gradient discent for classification problems and regression analysis.
+During your work the application is provided with usefull [snippets](http://en.wikipedia.org/wiki/Snippet_%28programming%29) and generators. Ajaila can be easily extended with common Machine Learning packages written in Ruby and C. Among supported libraries are [Statsample](http://ruby-statsample.rubyforge.org/), [MadLib](http://madlib.net/) ([EMC corporation](http://en.wikipedia.org/wiki/EMC_Corporation)) and [Vowpal Wabbit](https://github.com/JohnLangford/vowpal_wabbit) ([Yahoo! Research](http://research.yahoo.com/node/1914)), [online learning](http://en.wikipedia.org/wiki/Online_machine_learning) library based on [stochastic gradient discent](http://en.wikipedia.org/wiki/Stochastic_gradient_descent) for [classification problems](http://en.wikipedia.org/wiki/Category:Classification_algorithms) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).
 
-After prototyping you can deploy your application to the web and provide your predictive models with unstructured data from Hadoop via MapReduce, which is hidden from you behind classy ORM (Massive Record or Treasure Data Extensions).
+After prototyping you can deploy your application to the web and provide your predictive models with unstructured data from [Hadoop](http://hadoop.apache.org/) via [MapReduce](https://github.com/mac-r/ajaila), which is hidden from you behind classy [ORM](https://github.com/mac-r/ajaila) ([Massive Record](https://github.com/mac-r/ajaila) or [Treasure Data Extensions](https://github.com/mac-r/ajaila)).
 
-Ajaila helps you build long-lasting software and provides you with environment, which can be easily tested with RSpec. The platform is tested and can be trusted.
+Ajaila helps you build [long-lasting software](https://github.com/mac-r/ajaila) and provides you with environment, which can be easily tested with [RSpec](https://github.com/mac-r/ajaila). The platform itself is tested and can be trusted.
 
 ## Introduction
 
