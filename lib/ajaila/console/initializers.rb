@@ -47,6 +47,10 @@ command :new do |c|
     File.open(app_root+"/config/db.rb", 'w') {|f| f.write(db_content)}
     puts "\tprepared database config"
 
+    environment_content = Ajaila::ConsoleHelper.render("core/environment")
+    File.open(app_root+"/config/environment.rb", 'w') {|f| f.write(environment_content)}
+    puts "\tprepared environment config"
+
     File.open(app_root+"/sandbox/helpers/application.helper.rb", 'w') {|f| f.write("# Application Helper")}
     puts "\tprepared application helper"
     message = '

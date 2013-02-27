@@ -5,6 +5,7 @@ $:.unshift File.expand_path("../sandbox/helpers", [ROOT+"/*"][0])
 
 require "csv"
 require "db"
+require "environment"
 require "application.helper"
 
 def import(file)

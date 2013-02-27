@@ -2,7 +2,7 @@ command :run do |c|
   c.action do |global_options,options,args|
     Ajaila::RootDefiner.set_root
     if args == []
-      puts Ajaila::Messager.info("Running Ajaila Environment. Just a few seconds...")
+      puts Ajaila::Messager.info("This feature is not supported currently. To run dashboard you can type 'foreman start' or 'ruby service.rb' from the root folder of your application.")
     else
 
       options = args #[0].split(":")
@@ -37,7 +37,7 @@ end
 post do |global_options,command,options,args|
   if command.name == :run
     if args == []
-      system "foreman start"
+      
     else
       options = args
       instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
