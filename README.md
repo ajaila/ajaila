@@ -1,4 +1,4 @@
-# [Ajaila](https://github.com/mac-r/ajaila) Modular [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) for Predictive Analysis
+# [Ajaila](https://github.com/mac-r/ajaila): Modular [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) for Predictive Analysis
 
 ## Abstract
 
