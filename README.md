@@ -1,6 +1,5 @@
 # [Ajaila: Modular DSL for Predictive Analysis](https://github.com/mac-r/ajaila)
 
-# !!Notice!!
     This is a preliminary release for internal review.
     The official release will be announced later.
     Any suggestion for modification is welcome.
