@@ -1,7 +1,4 @@
-# [Ajaila](https://github.com/mac-r/ajaila)
-### Modular [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) for Predictive Analysis
-
-[![Build Status](https://travis-ci.org/mac-r/ajaila.png?branch=master)](https://travis-ci.org/mac-r/ajaila) [![Code Climate](https://codeclimate.com/badge.png)](https://codeclimate.com/github/mac-r/ajaila)
+# [Ajaila](https://github.com/mac-r/ajaila) Modular [DSL](http://en.wikipedia.org/wiki/Domain-specific_language) for Predictive Analysis
 
 ## Abstract
 
