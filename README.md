@@ -81,11 +81,7 @@ Raw dataset can be downloaded from here: `world_gdp.csv`.
 Now we should import this dataset into the database. The name of the database can be specified in the `config/db.rb`:
 ```ruby
 # inside SuperProject/config/db.rb
-
-##
-# Define your database name here
 MongoMapper.database = "superproject_db"
-
 ```
 
 Inside the `world_gdp.csv` we have two columns: year and total gdp. Dataset looks like this:
@@ -150,7 +146,6 @@ Let's try to build our predictive model. For this purpose we'll need to extend o
 ```ruby
 # inside SuperProject/Gemfile
 source "http://rubygems.org"
-
 gem "statsample"
 ```
 
@@ -262,7 +257,6 @@ This command will conduct the computation and return the following output:
 | Constant | -3557216.107 | -     | 189635.490 | -18.758 |
 | x        | 1798.264     | 0.959 | 95.007     | 18.928  |
 +----------+--------------+-------+------------+---------+
-
 ```
 
 In a short time Ajaila will be provided with Machine Learning packages as a default. You can help us with that!
