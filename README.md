@@ -22,7 +22,7 @@ Why are agile practices so important? Whether you are a software developer or re
 
 ## Installation 
 
-It's great to solve complex problems in a friendly environment. Are you already familiar with [Bundler](http://gembundler.com/), [RubyGems](https://rubygems.org/) and [RVM](https://rvm.io/)? That's cool! Current Ajaila version supports [Ruby 1.9.3](https://github.com/ruby/ruby). 
+It's great to solve complex problems in a friendly environment. Are you already familiar with [Bundler](http://gembundler.com/), [RubyGems](https://rubygems.org/) and [RVM](https://rvm.io/)? That's cool! Current Ajaila version supports [Ruby 1.9.3](https://github.com/ruby/ruby) or higher. 
 
 Ajaila needs a database to work properly. I decided to use [MongoDB](http://www.mongodb.org/) as a default, because of [ORM](http://en.wikipedia.org/wiki/Object-relational_mapping) ([MongoMapper](http://mongomapper.com/)). [MongoDB](http://www.mongodb.org/) doesn't need [migrations](http://guides.rubyonrails.org/migrations.html) and I find it convenient. Feel free to contribute and make support of other databases.
 
