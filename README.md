@@ -51,7 +51,7 @@ Ajaila Datamining Sandbox v. 0.0.2
 ## Creating a new project
 Let's see the framework in action. To create a new project we write:
 ```
-mac-r@ubuntu:~/demos$ ajaila new SuperProject
+mac-r@ubuntu:~$ ajaila new SuperProject
 ```
 
 That will return the following message:
@@ -74,7 +74,77 @@ Ajaila: generating new application "SuperProject"
   prepared application helper
 ```
 
-Now we go the application directory.
+There is a `datasets` folder inside the `SuperProject` directory. If we open it, we can see the `raw` directory, where all `CSV` files should be stored. We'll place there our `csv` file withing the information about Total Gross Domestic Product among all the countries since 1980 up to 2012 by years.
+
+Raw dataset can be downloaded from here: `world_gdp.csv`.
+
+Now we should import this dataset into the database. The name of the database can be specified in the `config/db.rb`:
+```ruby
+# inside SuperProject/config/db.rb
+
+##
+# Define your database name here
+MongoMapper.database = "superproject_db"
+
+```
+
+Inside the `world_gdp.csv` we have two columns: year and total gdp. Dataset looks like this:
+```
+...
+1983,11103.723
+1984,11539.276
+1985,11948.594
+...
+```
+
+That's why we generate a new table WorldGdp with two columns:
+```
+~/SuperProject$ ajaila g table WorldGdp year:Integer gdp:Float
+```
+
+If everything goes well, there will be a green message:
+```
+Ajaila: Generated table WorldGdp successfully!
+```
+
+This command generates a table inside `sandbox/tables`. The file is called `world_gdb.table.rb`. Inside the file we can observe the following code, which was generated automatically: 
+```ruby
+class WorldGdp
+  include MongoMapper::Document
+  key :year, Integer
+  key :gdp, Float
+end
+```
+
+After the table is created, we can generate selector, which will parse `world_gdp.csv` and import everything into the `WorldGdp` table:
+```
+~/SuperProject$ ajaila g selector GdpParser file:world_gdp.csv table:WorldGdp
+``` 
+
+Again, if everything goes well, there will be a green message:
+```
+Ajaila: Generated selector GdpParser successfully!
+```
+
+Let's look what is stored inside the selector (file `datasets/gdp_parser.selector.rb`):
+
+```ruby
+require "ajaila/selectors"
+file = import "world_gdp.csv"
+
+CSV.foreach file do |row|
+  year = row[0].to_i
+  gdp = row[1].to_f
+  WorldGdp.create(year: year, gdp: gdp)
+end
+```
+
+This code was generated automatically. Everything we need now is to run this selector:
+```
+~/SuperProject$ ajaila run selector GdpParser
+```
+
+After you enter this command dataset from `world_gdp.csv` should be imported inside `WorldGdp` table. That allows to work with data across the whole application.
 
 
 ## Console commands
