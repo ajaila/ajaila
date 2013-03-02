@@ -54,31 +54,49 @@ Let's see the framework in action. To create
 ## Console commands
 
 Creating a new project:
-`ajaila new ProjectName`
+```
+ajaila new ProjectName
+```
 
 Generating new table (among supported column formats are String, Integer, Float, Date, Array, Hash):
-`ajaila g table TableName user_name:String score:Float`
+```
+ajaila g table TableName user_name:String score:Float
+```
 
 Generating new selector:
-`ajaila g selector SomeSelector table:TableName file:users.csv`
+```
+ajaila g selector SomeSelector table:TableName file:users.csv
+```
 
 Generating new miner:
-`ajaila g miner SuperMiner table:InputTable table:OutputTable`
+```
+ajaila g miner SuperMiner table:InputTable table:OutputTable
+```
 
 Listing all selectors:
-`ajaila selectors`
+```
+ajaila selectors
+```
 
 Listing all miners:
-`ajaila miners`
+```
+ajaila miners
+```
 
 Running a selector:
-`ajaila run selector SomeSelector`
+```
+ajaila run selector SomeSelector
+```
 
 Running a miner:
-`ajaila run miner SuperMiner`
+```
+ajaila run miner SuperMiner
+```
 
 Running a dashboard with presenters:
-`ajaila run`
+```
+ajaila run
+```
 
 ## Architecture
 The platform consists of two blocks. Among them: Datasets and Sandbox. They exist in the context of Ajaila Environment, which provides everything with a library of methods and allows to generate new instances (selectors, miners, tables, presenters). There is also a Dashboard, which aggregates all information about the particular project (dashboard allows to observe the content of all presenters inside the project).
