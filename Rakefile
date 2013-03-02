@@ -18,8 +18,3 @@ task :cp do
   system "git push origin master"
 end
 
-
-# Cucumber::Rake::Task.new(:features) do |t|
-#   t.cucumber_opts = "features --format pretty -x"
-#   t.fork = false
-# end
