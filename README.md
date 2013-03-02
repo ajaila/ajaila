@@ -49,7 +49,7 @@ Ajaila Datamining Sandbox v. 0.0.2
 ```
 
 ## Creating a new project
-Let's see the framework in action. To create a new project we write:
+Let's see the framework in action. As an example, we'll build a linear regression to predict Total Worlds GDP for the end of 2013. To create a new project we write:
 ```
 mac-r@ubuntu:~$ ajaila new SuperProject
 ```
@@ -146,6 +146,62 @@ This code was generated automatically. Everything we need now is to run this sel
 
 After you enter this command dataset from `world_gdp.csv` should be imported inside `WorldGdp` table. That allows to work with data across the whole application.
 
+Let's try to build our predictive model. For this purpose we'll need to extend our application within `Statsample` library. To do this we simply add the following line of code inside `Gemfile` inside the application root directory:
+```ruby
+# inside SuperProject/Gemfile
+source "http://rubygems.org"
+
+gem "statsample"
+```
+
+Then we run bundler to install all dependencies:
+```
+~/SuperProject$ bundle install
+```
+
+This should install `Statsample` library within all dependencies. After installation, there will be the following message:
+```
+Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem is installed.
+```
+
+We need a one more step to use this library inside our application. We should open `config/environment.rb` and add this line of code:
+```ruby
+# inside SuperProject/config/environment.rb
+
+require "statsample"
+
+```
+
+Great, let's create a regression. This quantitative model should live inside a new miner. To build a new miner we go back to our console window and type:
+```
+~/SuperProject$ ajaila g miner GdpForecast table:WorldGdp
+```
+
+This will return:
+```
+Ajaila: Generated miner GdpForecast successfully!
+```
+
+If we open `sandbox/miners/gdp_forecast.miner.rb`, we'll observe the following automatically generated code:
+```ruby
+# inside SuperProject/sandbox/miners/gdp_forecast.miner.rb
+
+require "ajaila/miners"
+require "gdp_forecast.helper"
+
+WorldGdp.create(year: year, gdp: gdp)
+
+
+WorldGdp.all.each do |el|
+  year = el.year
+  gdp = el.gdp
+end
+
+```
+
+As it can be seen, Ajaila generated scripts, which help to read data from `WorldGdp` table and then create new rows inside this table. Both commands are rendered, because Ajaila doesn't know, which will be used. So it creates both snippets.
+
+We don't need to create new rows inside `WorldGdp`, so we simply delete this part of `GdpForecast` miner.
 
 ## Console commands
 
