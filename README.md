@@ -146,7 +146,7 @@ This code was generated automatically. Everything we need now is to run this sel
 
 After you enter this command dataset from `world_gdp.csv` should be imported inside `WorldGdp` table. That allows to work with data across the whole application.
 
-Let's try to build our predictive model. For this purpose we'll need to extend our application within `Statsample` library. To do this we simply add the following line of code inside `Gemfile` inside the application root directory:
+Let's try to build our predictive model. For this purpose we'll need to extend our application within `Statsample` library. To do this we simply add the following line of code inside `Gemfile` at the application root directory:
 ```ruby
 # inside SuperProject/Gemfile
 source "http://rubygems.org"
@@ -167,9 +167,7 @@ Your bundle is complete! Use `bundle show [gemname]` to see where a bundled gem 
 We need a one more step to use this library inside our application. We should open `config/environment.rb` and add this line of code:
 ```ruby
 # inside SuperProject/config/environment.rb
-
 require "statsample"
-
 ```
 
 Great, let's create a regression. This quantitative model should live inside a new miner. To build a new miner we go back to our console window and type:
@@ -191,17 +189,84 @@ require "gdp_forecast.helper"
 
 WorldGdp.create(year: year, gdp: gdp)
 
-
 WorldGdp.all.each do |el|
   year = el.year
   gdp = el.gdp
 end
-
 ```
 
 As it can be seen, Ajaila generated scripts, which help to read data from `WorldGdp` table and then create new rows inside this table. Both commands are rendered, because Ajaila doesn't know, which will be used. So it creates both snippets.
 
 We don't need to create new rows inside `WorldGdp`, so we simply delete this part of `GdpForecast` miner.
+
+There is a helper for `GdpForecast`, this file is called `gdp_forecast.helper.rb` inside `sandbox/helpers`. We can add a new method there:
+
+```ruby
+# inside sandbox/helpers/gdp_forecast.helper.rb 
+module GdpForecastHelper
+  self.extend GdpForecastHelper
+
+  def build_regression(x_array, y_array)
+    Statsample::Analysis.store(Statsample::Regression::Multiple) do
+      ds = dataset('x'=>x_array.to_scale)
+      attach(ds)
+      ds['y'] = y_array.to_scale
+      summary lr(ds,'y')
+    end
+    puts Statsample::Analysis.run_batch
+  end
+  
+end
+```
+
+Now we can implement this method inside `GdpForecast` miner. This is an example:
+```ruby
+require "ajaila/miners"
+require "gdp_forecast.helper"
+
+years = WorldGdp.all.map { |el| el.year }
+gdps = WorldGdp.all.map { |el| el.gdp }
+
+GdpForecastHelper.build_regression(years, gdps)
+```
+
+Then we can run this miner within the following command:
+```
+~/SuperProject$ ajaila run miner GdpForecast
+```
+
+This command will conduct the computation and return the following output:
+```
+= Statsample::Regression::Multiple
+  == Multiple reggresion of x on y
+    Engine: Statsample::Regression::Multiple::RubyEngine
+    Cases(listwise)=33(33)
+    R=0.959
+    R^2=0.920
+    R^2 Adj=0.918
+    Std.Error R=5196.787
+    Equation=-3557216.107 + 1798.264x
+    === ANOVA
+      ANOVA Table
++------------+-----------------+----+----------------+---------+-------+
+|   source   |       ss        | df |       ms       |    f    |   p   |
++------------+-----------------+----+----------------+---------+-------+
+| Regression | 9675386710.760  | 1  | 9675386710.760 | 358.260 | 0.000 |
+| Error      | 837204513.468   | 31 | 27006597.209   |         |       |
+| Total      | 10512591224.229 | 32 | 9702393307.969 |         |       |
++------------+-----------------+----+----------------+---------+-------+
+
+    Beta coefficients
++----------+--------------+-------+------------+---------+
+|  coeff   |      b       | beta  |     se     |    t    |
++----------+--------------+-------+------------+---------+
+| Constant | -3557216.107 | -     | 189635.490 | -18.758 |
+| x        | 1798.264     | 0.959 | 95.007     | 18.928  |
++----------+--------------+-------+------------+---------+
+
+```
+
+
 
 ## Console commands
 
