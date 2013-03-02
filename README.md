@@ -4,7 +4,7 @@
     The official release will be announced later.
     Any suggestion for modification is welcome.
 
-## Abstract
+## Short Description
 
 The application helps you to work with statistical datasets, normalize the data into a common format and build the required data models. Additionally, you can visualize your data with [Protovis](http://mbostock.github.com/protovis/) / [Highcharts.js](http://www.highcharts.com/) and scale your service with [Hadoop](http://hadoop.apache.org/) ([HDFS](http://hadoop.apache.org/docs/stable/hdfs_user_guide.html)).
 
