@@ -14,7 +14,7 @@ After prototyping you can deploy your application to the web and provide your pr
 
 Ajaila helps you build [long-lasting software](http://www.amazon.com/Engineering-Long-Lasting-Software-Computing-ebook/dp/B006WU5G4C) and provides you with environment, which can be easily tested with [RSpec](https://github.com/mac-r/ajaila). The platform itself is tested and can be trusted.
 
-## Introduction
+## Name Origin
 
 Ajaila is the composition of two words: ajala and agile. According to african mythology, "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. As far as you most probably know, "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore, it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework, which allows you to follow agile practices.
 
@@ -49,7 +49,33 @@ Ajaila Datamining Sandbox v. 0.0.2
 ```
 
 ## Creating a new project
-Let's see the framework in action. To create
+Let's see the framework in action. To create a new project we write:
+```
+mac-r@ubuntu:~/demos$ ajaila new SuperProject
+```
+
+That will return the following message:
+```
+Ajaila: generating new application "SuperProject"
+  created application root
+  prepared Config
+  prepared Datasets directory
+  prepared Raw folder in the Datasets directory
+  prepared Sandbox directory
+  prepared Miners folder in the Sandbox directory
+  prepared Presenters folder in the Sandbox directory
+  prepared Tables folder in the Sandbox directory
+  prepared Helpers folder in the Sandbox directory
+  prepared Gemfile
+  prepared Service
+  prepared Procfile
+  prepared database config
+  prepared environment config
+  prepared application helper
+```
+
+Now we go the application directory.
+
 
 ## Console commands
 
@@ -58,17 +84,17 @@ Creating a new project:
 ajaila new ProjectName
 ```
 
-Generating new table (among supported column formats are String, Integer, Float, Date, Array, Hash):
+Generating a new table (among supported column formats are String, Integer, Float, Date, Array, Hash):
 ```
 ajaila g table TableName user_name:String score:Float
 ```
 
-Generating new selector:
+Generating a new selector:
 ```
 ajaila g selector SomeSelector table:TableName file:users.csv
 ```
 
-Generating new miner:
+Generating a new miner:
 ```
 ajaila g miner SuperMiner table:InputTable table:OutputTable
 ```
