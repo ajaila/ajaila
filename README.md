@@ -183,7 +183,6 @@ Ajaila: Generated miner GdpForecast successfully!
 If we open `sandbox/miners/gdp_forecast.miner.rb`, we'll observe the following automatically generated code:
 ```ruby
 # inside SuperProject/sandbox/miners/gdp_forecast.miner.rb
-
 require "ajaila/miners"
 require "gdp_forecast.helper"
 
@@ -266,7 +265,7 @@ This command will conduct the computation and return the following output:
 
 ```
 
-
+In a short time Ajaila will be provided with Machine Learning packages as a default. You can help us with that!
 
 ## Console commands
 
