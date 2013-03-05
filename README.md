@@ -263,17 +263,22 @@ In a short time Ajaila will be provided with Machine Learning packages as a defa
 
 ## Console commands
 
-Creating a new project:
+### Creating New Project
+This command creates the core of your datamining project.
 ```
 ajaila new ProjectName
 ```
+After executing this command you will be offered to configure the name of your database inside `config/db.rb`, but this is absolutely optional. For example, if your application is called `AlohaHawai` then the name of the application database will be `aloha_hawai_db`.
+
+### Generators
 
 Generating a new table (among supported column formats are String, Integer, Float, Date, Array, Hash):
 ```
 ajaila g table TableName user_name:String score:Float
 ```
+When you run this command from your console, a new file appears. This file is called `table_name.table.rb` and located at `sandbox/tables`. All tables exist in the context of MongoMapper (ORM of MongoDB). One great thing about it is that there is no need for migrations.
 
-Generating a new selector:
+Generating a new selector is done within the following command:
 ```
 ajaila g selector SomeSelector table:TableName file:users.csv
 ```
@@ -282,6 +287,13 @@ Generating a new miner:
 ```
 ajaila g miner SuperMiner table:InputTable table:OutputTable
 ```
+
+Generating a new presenter:
+```
+ajaila g presenter SuperPresenter table:SuperPuper
+```
+
+### Looking Around
 
 Listing all selectors:
 ```
@@ -292,6 +304,8 @@ Listing all miners:
 ```
 ajaila miners
 ```
+
+### Executing
 
 Running a selector:
 ```
