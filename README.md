@@ -277,7 +277,7 @@ Ajaila: Generated presenter CoolGraph successfully!
 ```
 
 That's good. Now we have `CoolGraph`, which lives inside `sandbox/presenters/cool_graph.presenter.erb`. Let's check `CoolGraph` contents:
-```ruby
+```erb
 <%=
 
 #
