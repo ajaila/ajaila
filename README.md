@@ -497,6 +497,49 @@ Presenters are still work in progress. There is no DSL yet, but I can explain yo
 | Helpers | Modules, which store methods used by other parts of an Application. | Generated within miners automatically. |
 | Presenters | Provide user with a DSL to visualize Data. | Can be created manually (still in development). |
 
+## Built-in Methods
+Before you want to write something on your own, look through Ajaila library. It is a valuable source of methods, which is permanently and dramatically extended day by day. These methods are carefully hand picked from all those projects, which get built with Ajaila. Let's walk through them.
+
+### to_growth
+```ruby
+Ajaila.to_growth(p1,p2)
+```
+
+### normalize
+```ruby
+Ajaila.normalize(array)
+```
+
+### detect_nil
+```ruby
+Ajaila.detect_nil(input, quit = 0)
+```
+
+### execute_miner
+```ruby
+Ajaila.execute_miner(name)
+```
+
+### execute_selector
+```ruby
+Ajaila.execute_selector(name)
+```
+
+### all_days_at_interval
+```ruby
+Ajaila.all_days_at_interval(time_start, time_end)
+```
+
+### one_day
+```ruby
+Ajaila.one_day
+```
+
+### linear_plot
+```ruby
+Ajaila.linear_plot(sample, opts = {})
+```
+
 ## License
 
 The MIT License
