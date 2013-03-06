@@ -501,28 +501,38 @@ Presenters are still work in progress. There is no DSL yet, but I can explain yo
 Before you want to write something on your own, look through Ajaila library. It is a valuable source of methods, which is permanently and dramatically extended day by day. These methods are carefully hand picked from all those projects, which get built with Ajaila. Let's walk through them.
 
 ### to_growth
+Takes two numbers as an input, converts them into float and calculates how much second parameter is bigger or lower than the first one. Example:
 ```ruby
-Ajaila.to_growth(p1,p2)
+price_day_one = 100
+price_day_two = 200
+Ajaila.to_growth(price_day_one, price_day_two) # => 1.0
 ```
 
 ### normalize
+Conducts normalization of all numbers inside the array. Example:
 ```ruby
-Ajaila.normalize(array)
+array = [1,2,3,4]
+Ajaila.normalize(array) # => [0.0, 0.3333333333333333, 0.6666666666666666, 1.0]
 ```
 
 ### detect_nil
+Checks if the input value is nil. By default it raises an error, but the second parameter is optional. If it is equal 1, then `nil` values will be replaced with `0`. Examples:
 ```ruby
-Ajaila.detect_nil(input, quit = 0)
+input = 100500
+Ajaila.detect_nil(input) # => Raises an error, that nil is detected!
+Ajaila.detect_nil(input, 1) # => 0.0
 ```
 
 ### execute_miner
+If there is a cascade of algorithms, then you may find it nice to incapsulate each computation inside separate miners and then generate additional miner, which runs sequence. There are many other usecases. Example:
 ```ruby
-Ajaila.execute_miner(name)
+Ajaila.execute_miner("FutureForecast") # => executes miner FutureForecast
 ```
 
 ### execute_selector
+Here is the same logic as with the miners execution. According to typical usecases, this method is a perfect fit if you collaborate with external libraries via text inputs and outputs. Awesome method. Example:
 ```ruby
-Ajaila.execute_selector(name)
+Ajaila.execute_selector("NewsParser") # => executes selector NewsParser
 ```
 
 ### all_days_at_interval
