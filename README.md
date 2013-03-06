@@ -73,6 +73,7 @@ Ajaila: generating new application "SuperProject"
   prepared environment config
   prepared application helper
 ```
+## Simple Example
 
 There is a `datasets` folder inside the `SuperProject` directory. If we open it, we can see the `raw` directory, where all `CSV` files should be stored. We'll place there our `csv` file withing the information about Total Gross Domestic Product among all the countries since 1980 up to 2012 by years.
 
