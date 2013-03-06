@@ -261,6 +261,47 @@ This command will conduct the computation and return the following output:
 
 In a short time Ajaila will be provided with Machine Learning packages as a default. You can help us with that!
 
+## Visualizing Data
+
+Current Ajaila library utilizes a Protovis wrapper called Rubyvis. This allows to generate SVG graphs, which can be further observed through Ajaila Dashboard. To visualize data from one of your tables you should create new presenters. Let's see how to do this.
+
+At the initial step we open the terminal window and go to an application directory, where we run a command to generate a presenter. In case of `SuperProject` this will look in such way:
+```
+~/SuperProject$ ajaila g presenter CoolGraph table:WorldGdp
+```
+As you see, presenter needs a link to the table name. Otherwise, it won't be created. 
+
+There should be a green message like this:
+```
+Ajaila: Generated presenter CoolGraph successfully!
+```
+
+That's good. Now we have `CoolGraph`, which lives inside `sandbox/presenters/cool_graph.presenter.erb`. Let's check `CoolGraph` contents:
+```ruby
+<%=
+
+#
+# To visualize necessary attributes replace "0" with
+# "item.some_column", where "some_column" is the attribute
+# of Integer, Float, Fixnum classes.
+#
+# Example:
+# sample = WorldGdp.all.map { |item| item.growth }
+#
+# You may also find useful such option to view 
+# sorted output (date column required):
+# sample = WorldGdp.all(:order => :date.asc).map { |item| item.growth }
+#
+
+sample = WorldGdp.all.map { |item| 0 }
+
+Ajaila.linear_plot(sample, { :plot_name => "Untitled Plot", 
+                           :graph_name => "Unknown Line",
+                           :color => "blue" })
+
+%>
+```
+
 ## Console commands
 
 ### Creating New Project
@@ -303,6 +344,11 @@ ajaila selectors
 Listing all miners:
 ```
 ajaila miners
+```
+
+Listing all tables:
+```
+ajaila tables
 ```
 
 ### Executing
