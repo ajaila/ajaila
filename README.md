@@ -279,28 +279,30 @@ Ajaila: Generated presenter CoolGraph successfully!
 That's good. Now we have `CoolGraph`, which lives inside `sandbox/presenters/cool_graph.presenter.erb`. Let's check `CoolGraph` contents:
 ```erb
 <%=
-
-#
-# To visualize necessary attributes replace "0" with
-# "item.some_column", where "some_column" is the attribute
-# of Integer, Float, Fixnum classes.
-#
-# Example:
-# sample = WorldGdp.all.map { |item| item.growth }
-#
-# You may also find useful such option to view 
-# sorted output (date column required):
-# sample = WorldGdp.all(:order => :date.asc).map { |item| item.growth }
-#
-
 sample = WorldGdp.all.map { |item| 0 }
-
 Ajaila.linear_plot(sample, { :plot_name => "Untitled Plot", 
                            :graph_name => "Unknown Line",
                            :color => "blue" })
-
 %>
 ```
+
+This code snippet represents the most part of our job. We have to specify request to the database and change parameters of linear plot. Our final solution should look like this:
+```erb
+<%=
+sample = WorldGdp.all(:order => :date.asc).map { |item| item.gdp }
+Ajaila.linear_plot(sample, { :plot_name => "World GDP, 1980 - 2012", 
+                           :graph_name => "total gdp",
+                           :color => "green" })
+%>
+```
+
+After little modifications we save everything and start Ajaila dashboard within the command:
+```
+~/SuperProject$ foreman start
+```
+
+Then we open new browser window and go to the `http://localhost:9500/cool_graph`. If you did everything right, you will see the image:
+<img src="https://raw.github.com/mac-r/ajaila-media/master/gdp_shot.png" width=150>
 
 ## Console commands
 
