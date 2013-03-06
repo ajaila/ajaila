@@ -301,7 +301,7 @@ After little modifications we save everything and start Ajaila dashboard within 
 ~/SuperProject$ foreman start
 ```
 
-Then we open new browser window and go to the `http://localhost:9500/cool_graph`. If you did everything right, you will see the image:
+Then we open new browser window and go to the `http://localhost:9500/cool_graph`. If you did everything right, you will see the image (example is ugly, but I hope you got the idea):
 
 <img src="https://raw.github.com/mac-r/ajaila-media/master/gdp_shot.png" width=640>
 
