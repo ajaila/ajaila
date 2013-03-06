@@ -302,6 +302,7 @@ After little modifications we save everything and start Ajaila dashboard within 
 ```
 
 Then we open new browser window and go to the `http://localhost:9500/cool_graph`. If you did everything right, you will see the image:
+
 <img src="https://raw.github.com/mac-r/ajaila-media/master/gdp_shot.png" width=640>
 
 ## Console commands
