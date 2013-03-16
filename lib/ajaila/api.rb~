@@ -60,7 +60,7 @@ module Ajaila
     x = pv.Scale.linear(data, lambda {|d| d.x}).range(0, w)
     w = 850
     h = 400  
-    y = pv.Scale.linear(sample.min-100, sample.max+10).range(0, h);
+    y = pv.Scale.linear(sample.min, sample.max).range(0, h);
     
     #/* The root panel. */
     vis = pv.Panel.new().width(w).height(h).bottom(20).left(20).right(40).top(5)
