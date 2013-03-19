@@ -8,8 +8,14 @@ Gem::Specification.new do |s|
   s.authors = ["Max Makarochkin"]
   s.email = ["maxim.makarochkin at gmail.com"]
   s.homepage = "http://ajaila.com"
-  s.summary = %q{datamining framework}
-  s.description = %q{Develop your datamining project following Agile practices}
+  s.summary = %q{Ajaila: Modular DSL for Predictive Analysis}
+  s.description = %q{The application helps you to work with statistical datasets, normalize the data into a common format and build the required data models. Additionally, you can visualize your data with Protovis / Highcharts.js and scale your service with Hadoop (HDFS).
+
+During your work the application is provided with usefull snippets and generators. Ajaila can be easily extended with common Machine Learning packages written in Ruby and C. Among supported libraries are Statsample, MadLib (EMC corporation) and Vowpal Wabbit (Yahoo! Research), online learning library based on stochastic gradient discent for classification problems and regression analysis.
+
+After prototyping you can deploy your application to the web and provide your predictive models with unstructured data from Hadoop via MapReduce, which is hidden from you behind classy ORM (Massive Record or Treasure Data Extensions).
+
+Ajaila helps you build long-lasting software and provides you with environment, which can be easily tested with RSpec. }
   s.rubyforge_project = "ajaila"
   s.executables = ["ajaila"]
   s.files = Dir.glob("{bin,lib,spec}/**/*")
