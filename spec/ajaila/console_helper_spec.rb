@@ -28,8 +28,8 @@ describe Ajaila do
   end
 
   it "should check additional parameters" do
-    # args = ["miner", "Foo"]
-    # Ajaila::ConsoleHelper.additional_params(args).should raise_error
+    args = ["miner", "Foo"]
+    lambda{Ajaila::ConsoleHelper.additional_params(args)}.should raise_error
 
     args = ["miner", "Foo", "lalala", "pampam"]
     Ajaila::ConsoleHelper.additional_params(args).should == ["lalala", "pampam"]
