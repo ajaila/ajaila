@@ -58,7 +58,7 @@ gem install ajaila --pre
 ### NB!
 Don't install 0.0.1 release. It's a crap.
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -87,7 +87,7 @@ Ajaila: generating new application "SuperProject"
   prepared environment config
   prepared application helper
 ```
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -283,19 +283,19 @@ This command will conduct the computation and return the following output:
 
 In a short time Ajaila will be provided with Machine Learning packages as a default. You can help us with that!
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
 ### Image Retrieval
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
 ### Credit Scoring
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -344,7 +344,7 @@ Then we open new browser window and go to the `http://localhost:9500/cool_graph`
 
 <img src="https://raw.github.com/mac-r/ajaila-media/master/gdp_shot.png" width=640>
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -414,7 +414,7 @@ Running a dashboard with presenters:
 ajaila run
 ```
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -543,7 +543,7 @@ Presenters are still work in progress. There is no DSL yet, but I can explain yo
 | Helpers | Modules, which store methods used by other parts of an Application. | Generated within miners automatically. |
 | Presenters | Provide user with a DSL to visualize Data. | Can be created manually (still in development). |
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -601,7 +601,7 @@ Ajaila.linear_plot(sample, opts = {})
 ```
 
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -633,7 +633,7 @@ After installing all dependencies you'll be able to check if everything went rig
 Ajaila Datamining Sandbox v. 0.0.2
 ```
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -643,19 +643,19 @@ Ajaila is the composition of two words: ajala and agile. According to african my
 
 Why are agile practices so important? Whether you are a software developer or research engineer, there is always someone interested in what you are doing. These people are stakeholders in a project you are working on. Demonstrating results on a regular basis is the crucial point, which allows to succeed. With Ajaila you can conduct R&D, split your datamining project into sustainable parts and show progress within each iteration. 
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
 ## Features List
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
 ## Contributing
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
 
 
 
@@ -671,4 +671,4 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-([table of contents](#table-of-contents))
+([back to the table of contents](#table-of-contents))
