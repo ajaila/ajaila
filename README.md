@@ -48,6 +48,17 @@ Ajaila helps you build [long-lasting software](http://www.amazon.com/Engineering
     * [License](#license)
 
 
+## Installation
+
+The latest virsion is available via Rubygems:
+```
+gem install ajaila --pre
+```
+
+### NB!
+Don't install 0.0.1 release. It's a crap.
+
+([table of contents](#table-of-contents))
 
 
 
@@ -76,6 +87,10 @@ Ajaila: generating new application "SuperProject"
   prepared environment config
   prepared application helper
 ```
+([table of contents](#table-of-contents))
+
+
+
 
 ## Examples
 
@@ -268,9 +283,21 @@ This command will conduct the computation and return the following output:
 
 In a short time Ajaila will be provided with Machine Learning packages as a default. You can help us with that!
 
+([table of contents](#table-of-contents))
+
+
+
 ### Image Retrieval
 
+([table of contents](#table-of-contents))
+
+
+
 ### Credit Scoring
+
+([table of contents](#table-of-contents))
+
+
 
 
 ## Visualizing Data
@@ -316,6 +343,10 @@ After little modifications we save everything and start Ajaila dashboard within 
 Then we open new browser window and go to the `http://localhost:9500/cool_graph`. If you did everything right, you will see the image (example is ugly, but I hope you got the idea):
 
 <img src="https://raw.github.com/mac-r/ajaila-media/master/gdp_shot.png" width=640>
+
+([table of contents](#table-of-contents))
+
+
 
 ## Console commands
 
@@ -382,6 +413,10 @@ Running a dashboard with presenters:
 ```
 ajaila run
 ```
+
+([table of contents](#table-of-contents))
+
+
 
 ## Architecture
 The platform consists of two blocks. Among them: Datasets and Sandbox. They exist in the context of Ajaila Environment, which provides everything with a library of methods and allows to generate new instances (selectors, miners, tables, presenters). There is also a Dashboard, which aggregates all information about the particular project (dashboard allows to observe the content of all presenters inside the project).
@@ -508,6 +543,10 @@ Presenters are still work in progress. There is no DSL yet, but I can explain yo
 | Helpers | Modules, which store methods used by other parts of an Application. | Generated within miners automatically. |
 | Presenters | Provide user with a DSL to visualize Data. | Can be created manually (still in development). |
 
+([table of contents](#table-of-contents))
+
+
+
 ## Built-in Methods
 Before you want to write something on your own, look through Ajaila library. It is a valuable source of methods, which is permanently and dramatically extended day by day. These methods are carefully hand picked from all those projects, which get built with Ajaila. Let's walk through them.
 
@@ -562,6 +601,10 @@ Ajaila.linear_plot(sample, opts = {})
 ```
 
 
+([table of contents](#table-of-contents))
+
+
+
 ## Installation From Source
 
 It's great to solve complex problems in a friendly environment. Are you already familiar with [Bundler](http://gembundler.com/), [RubyGems](https://rubygems.org/) and [RVM](https://rvm.io/)? That's cool! Current Ajaila version supports [Ruby 1.9.3](https://github.com/ruby/ruby) or higher. 
@@ -589,15 +632,32 @@ After installing all dependencies you'll be able to check if everything went rig
 ```
 Ajaila Datamining Sandbox v. 0.0.2
 ```
+
+([table of contents](#table-of-contents))
+
+
+
 ## Name Origin
 
 Ajaila is the composition of two words: ajala and agile. According to african mythology, "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. As far as you most probably know, "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore, it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework, which allows you to follow agile practices.
 
 Why are agile practices so important? Whether you are a software developer or research engineer, there is always someone interested in what you are doing. These people are stakeholders in a project you are working on. Demonstrating results on a regular basis is the crucial point, which allows to succeed. With Ajaila you can conduct R&D, split your datamining project into sustainable parts and show progress within each iteration. 
 
+([table of contents](#table-of-contents))
+
+
+
 ## Features List
 
+([table of contents](#table-of-contents))
+
+
+
 ## Contributing
+
+([table of contents](#table-of-contents))
+
+
 
 ## License
 
@@ -611,4 +671,4 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-
+([table of contents](#table-of-contents))
