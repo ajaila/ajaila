@@ -23,8 +23,8 @@ describe Ajaila do
   	lambda{Ajaila::ConsoleHelper.check_inputs_g(args)}.should raise_error
 
   	# ajaila g miner
-  	# args = ["miner"]
-    # Ajaila::ConsoleHelper.check_inputs_g(args).should raise_error
+  	args = ["miner"]
+    lambda{Ajaila::ConsoleHelper.check_inputs_g(args)}.should raise_error
   end
 
   it "should check additional parameters" do
