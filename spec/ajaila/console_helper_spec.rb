@@ -19,8 +19,8 @@ describe Ajaila do
   	Ajaila::ConsoleHelper.check_inputs_g(args).should == 0
 
   	# ajaila g shit Foo
-  	# args = ["shit", "Foo"]
-  	# Ajaila::ConsoleHelper.check_inputs_g(args).should raise_error
+  	args = ["shit", "Foo"]
+  	lambda{Ajaila::ConsoleHelper.check_inputs_g(args)}.should raise_error
 
   	# ajaila g miner
   	# args = ["miner"]
