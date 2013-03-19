@@ -51,6 +51,7 @@ module Ajaila
   # name:String age:integer => [["name", "String"],["age", "Integer"]]
   def parse_columns(columns)
     pairs = []
+    raise TypeError, Ajaila::Messager.warning("Your table should include columns. Add something like this: name:String age:Integer and etc.") if columns == []
     columns.each do |key_string|
       params = key_string.split(':')
       raise TypeError, Ajaila::Messager.warning("Wrong format of table parameters (name:String/Integer/Date/etc)") if KNOWN_CLASSES.include?(params[1].capitalize) == false
