@@ -14,6 +14,42 @@ After prototyping you can deploy your application to the web and provide your pr
 
 Ajaila helps you build [long-lasting software](http://www.amazon.com/Engineering-Long-Lasting-Software-Computing-ebook/dp/B006WU5G4C) and provides you with environment, which can be easily tested with [RSpec](https://github.com/mac-r/ajaila). The platform itself is tested and can be trusted.
 
+## Table of Contents
+* [Ajaila](https://github.com/ajaila/ajaila#ajaila-modular-dsl-for-predictive-analysis)
+    * [Short Description](https://github.com/ajaila/ajaila#short-description)
+    * [Installation](https://github.com/ajaila/ajaila#installation)
+    * [Creating a New Project](https://github.com/ajaila/ajaila#creating-a-new-project)
+    * [Examples](https://github.com/ajaila/ajaila#examples)
+        * [Simple Example with Statsample](https://github.com/ajaila/ajaila#simple-example)
+        * [Image Retrieval with RMagick](https://github.com/ajaila/ajaila#image-retrieval)
+        * [Credit Scoring with Vowpal Wabbit](https://github.com/ajaila/ajaila#credit-scoring)
+    * [Visualizing Data](https://github.com/ajaila/ajaila#visualizing-data)
+    * [Console Commands](https://github.com/ajaila/ajaila#console-commands)
+        * [Generators](https://github.com/ajaila/ajaila#generators)
+        * [Looking Around](https://github.com/ajaila/ajaila#looking-around)
+        * [Executing](https://github.com/ajaila/ajaila#executing)
+    * [Architecture](https://github.com/ajaila/ajaila#architecture)
+        * [Datasets vs. Sandbox](https://github.com/ajaila/ajaila#datasets-vs-sandbox)
+        * [Datasets Explained](https://github.com/ajaila/ajaila#datasets-explained)
+            * [Inside Selector](https://github.com/ajaila/ajaila#inside-selector)
+            * [Datasets Overview](https://github.com/ajaila/ajaila#datasets-overview)
+        * [Sandbox Explained](https://github.com/ajaila/ajaila#sandbox-explained)
+            * [Tables](https://github.com/ajaila/ajaila#tables)
+            * [Inside Table](https://github.com/ajaila/ajaila#inside-table)
+            * [Miners](https://github.com/ajaila/ajaila#miners)
+            * [Helpers](https://github.com/ajaila/ajaila#helpers)
+            * [Presenters](https://github.com/ajaila/ajaila#presenters)
+            * [Sandbox Overview](https://github.com/ajaila/ajaila#sandbox-overview)
+    * [Built-in Methods](https://github.com/ajaila/ajaila#built-in-methods)
+    * [Installation From Source](https://github.com/ajaila/ajaila#installation-from-source)
+    * [Name Origin](https://github.com/ajaila/ajaila#name-origin)
+    * [Features List](https://github.com/ajaila/ajaila#features-list)
+    * [Contributing](https://github.com/ajaila/ajaila#contributing)
+    * [License](https://github.com/ajaila/ajaila#license)
+
+
+
+
 
 ## Creating a new project
 Let's see the framework in action. As an example, we'll build a linear regression to predict Total Worlds GDP for the end of 2013. To create a new project we write:
@@ -40,7 +76,10 @@ Ajaila: generating new application "SuperProject"
   prepared environment config
   prepared application helper
 ```
-## Simple Example
+
+## Examples
+
+### Simple Example
 
 There is a `datasets` folder inside the `SuperProject` directory. If we open it, we can see the `raw` directory, where all `CSV` files should be stored. We'll place there our `csv` file withing the information about Total Gross Domestic Product among all the countries since 1980 up to 2012 by years.
 
@@ -229,6 +268,11 @@ This command will conduct the computation and return the following output:
 
 In a short time Ajaila will be provided with Machine Learning packages as a default. You can help us with that!
 
+### Image Retrieval
+
+### Credit Scoring
+
+
 ## Visualizing Data
 
 Current Ajaila library utilizes a Protovis wrapper called Rubyvis. This allows to generate SVG graphs, which can be further observed through Ajaila Dashboard. To visualize data from one of your tables you should create new presenters. Let's see how to do this.
@@ -362,7 +406,7 @@ Selectors are the dwellers of Datasets folder. This dudes are very important. Le
 
 Selectors simply fill an empty box within the data. As soon as `Sandbox` is ready we move to the next step of our workflow. Selectors are left behind and we are making a short bio for each Datasets dweller.
 
-### Inside Selector
+#### Inside Selector
 We created a new project called SuperProject. Our mission is to analyze Cool Things, which are stored in the CSV file called `items.csv`. We put this file into `SuperProject/datasets/raw` directory.
 
 Before generating a selector we need to generate some table, which will store the contents of `items.csv`. We open a Terminal window in the SuperProject directory and write the following command.
@@ -409,16 +453,16 @@ ajaila run selector ItemsExtractor
 
 Now we have `CoolThings`, which are a dynamic representation of `items.csv`.
 
-### Datasets Overview
+#### Datasets Overview
 | Resident Name | Short Bio | Interaction |
 | ------------- |:-------------:| -----:|
 | CSV Files | Live inside `datasets/raw`. Keep all the data of the project in the static form. | Manually Placed |
 | Selectors | Require table and file as an input. They know how to parse CSV files. | Generated and executed via Terminal Command |
 
-## Sandbox Explained
+### Sandbox Explained
 Datasets are easier to understand, because Sandbox consists of more elements. As you can observe at the scheme above, there are Tables, Miners, Helpers and Presenters. Quite self-explanatory names, aren't they?
 
-### Tables
+##### Tables
 After the selection process, data is stored in the database. The access point for the data is a set of tables stored in the `sandbox/tables` folder. MongoDB gives us freedom not to generate migrations (that saves a lot of time). Additionally, we can change any table or rewrite everything in a new way.
 
 Tables initialize new collections within the Mongomapper. Collections are available through selectors, miners and presenters. Helpers are not linked with Ajaila environment directly, but you can call collections and their methods. Helpers are usually a part of something (new helper gets generated within new miner).
@@ -441,7 +485,7 @@ end
 
 Ajaila generated this file automatically. As you may observe, `CoolThings` is a class of Mongomapper.
 
-### Miners
+#### Miners
 Write your algorithms inside Helpers and execute them inside Miners. When you generate new Miner you have to specify tables, which will be used as an Input or Output. After you specify I/O tables Ajaila has an opportunity to generate valuable snippets according to the information specified in tables.
 
 Miner is more powerful if it's task oriented and focused. Miner should be readable and have as many functions inside Helper as possible. Miners are difficult to get tested directly, methods inside Helpers are much easier to test.
@@ -456,7 +500,7 @@ There is also an `ApplicationHelper`. This helper is so global, that it can be u
 #### Presenters
 Presenters are still work in progress. There is no DSL yet, but I can explain you how to build Charts manually. Just let me know that you need it.
 
-### Sandbox Overview
+#### Sandbox Overview
 | Residents | Short Bio | Interaction |
 | ------------- |:-------------:| -----:|
 | Tables | Store information about Data Structures. Get initialized within Ajaila environment. | Can be generated or listed. |
@@ -517,13 +561,8 @@ Ajaila.one_day
 Ajaila.linear_plot(sample, opts = {})
 ```
 
-## Name Origin
 
-Ajaila is the composition of two words: ajala and agile. According to african mythology, "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. As far as you most probably know, "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore, it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework, which allows you to follow agile practices.
-
-Why are agile practices so important? Whether you are a software developer or research engineer, there is always someone interested in what you are doing. These people are stakeholders in a project you are working on. Demonstrating results on a regular basis is the crucial point, which allows to succeed. With Ajaila you can conduct R&D, split your datamining project into sustainable parts and show progress within each iteration. 
-
-## Installation 
+## Installation From Source
 
 It's great to solve complex problems in a friendly environment. Are you already familiar with [Bundler](http://gembundler.com/), [RubyGems](https://rubygems.org/) and [RVM](https://rvm.io/)? That's cool! Current Ajaila version supports [Ruby 1.9.3](https://github.com/ruby/ruby) or higher. 
 
@@ -550,8 +589,15 @@ After installing all dependencies you'll be able to check if everything went rig
 ```
 Ajaila Datamining Sandbox v. 0.0.2
 ```
+## Name Origin
 
+Ajaila is the composition of two words: ajala and agile. According to african mythology, "Ajala" is the god of creation, who lives in heaven and makes human faces from clay and chaos. As far as you most probably know, "agile" describes a flexible approach to software development, which expects you to split the workflow into sustainable pieces. Therefore, it shouldn't be surprising for you why Ajaila is called like that. We are talking about datamining framework, which allows you to follow agile practices.
 
+Why are agile practices so important? Whether you are a software developer or research engineer, there is always someone interested in what you are doing. These people are stakeholders in a project you are working on. Demonstrating results on a regular basis is the crucial point, which allows to succeed. With Ajaila you can conduct R&D, split your datamining project into sustainable parts and show progress within each iteration. 
+
+## Features List
+
+## Contributing
 
 ## License
 
