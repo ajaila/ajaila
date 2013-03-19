@@ -49,10 +49,10 @@ describe Ajaila do
   it "should parse columns" do
   	columns = ["name:String","age:integer"]
     Ajaila::ConsoleHelper.parse_columns(columns).should == [["name", "String"],["age", "Integer"]]
-    # columns = []
-    # Ajaila::ConsoleHelper.parse_columns(columns).should raise_error
-    # columns = ["animal:Monkey"]
-    # Ajaila::ConsoleHelper.parse_columns(columns).should raise_error
+    columns = []
+    lambda{Ajaila::ConsoleHelper.parse_columns(columns)}.should raise_error
+    columns = ["animal:Monkey"]
+    lambda{Ajaila::ConsoleHelper.parse_columns(columns)}.should raise_error
   end
 
   it "should get tables" do
