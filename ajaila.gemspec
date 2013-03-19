@@ -3,7 +3,7 @@ require "ajaila_version"
 
 Gem::Specification.new do |s|
   s.name = "ajaila"
-  s.version = Ajaila::VERSION
+  s.version = '0.0.2alpha' # 19 of March Release, later commits are not included
   s.platform = Gem::Platform::RUBY
   s.authors = ["Max Makarochkin"]
   s.email = ["maxim.makarochkin at gmail.com"]
