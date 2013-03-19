@@ -59,15 +59,15 @@ describe Ajaila do
   	params = ["table:Foo","file:Nooo","table:Lol"]
     Ajaila::ConsoleHelper.get_tables(params).should == ["Foo","Lol"]
     Ajaila::ConsoleHelper.get_tables(params).include?("Nooo").should_not == true
-    # params = []
-    # Ajaila::ConsoleHelper.get_tables(params).should raise_error
+    params = []
+    lambda{Ajaila::ConsoleHelper.get_tables(params)}.should raise_error
   end
 
   it "should get files" do
   	params = ["table:Foo","file:foo.csv","table:Lol", "file:boo.csv"]
     Ajaila::ConsoleHelper.get_files(params).should == ["foo.csv","boo.csv"]
-    # params = ["table:Foo","file:foo.csv","table:Lol", "file:boo.csd"]
-    # Ajaila::ConsoleHelper.get_files(params).should raise_error
+    params = ["table:Foo","file:foo.csv","table:Lol", "file:boo.csd"]
+    lambda{Ajaila::ConsoleHelper.get_files(params)}.should raise_error
   end
 
   it "should convert name to file" do
