@@ -1,5 +1,3 @@
-![logo](https://raw.github.com/ajaila/ajaila-website/master/images/ajaila_small.png)
-
 # [Ajaila: Modular DSL for Predictive Analysis](https://github.com/ajaila/ajaila)
 
     This is a preliminary release for internal review.
