@@ -287,13 +287,13 @@ In a short time Ajaila will be provided with Machine Learning packages as a defa
 
 
 
-### Image Retrieval
+### [Image Retrieval with RMagick](https://github.com/ajaila/image_recognition)
 
 ([back to the table of contents](#table-of-contents))
 
 
 
-### Credit Scoring
+### [Credit Scoring with Vowpal Wabbit](https://github.com/ajaila/credit_scoring)
 
 ([back to the table of contents](#table-of-contents))
 
