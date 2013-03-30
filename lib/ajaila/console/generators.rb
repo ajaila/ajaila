@@ -15,14 +15,16 @@ command :g do |c|
 
     if args[0] == "selector"
       content = Ajaila::ConsoleHelper.render("selector")
-      io = Ajaila::ConsoleHelper.additional_params(args)
-      file = Ajaila::ConsoleHelper.get_file(io)
-      file_name = Ajaila::ConsoleHelper.get_file(io).split(".").first.upcase
-      table = Ajaila::ConsoleHelper.get_table(io)
-      all_columns = Ajaila::ConsoleHelper.get_columns(table)
-      clast = all_columns.pop
-      cleft = all_columns
-      content += "\n" + Ajaila::ConsoleHelper.render( "_parser", :columns => cleft, :last => clast, :collection => table, :file => file, :file_name => file_name )
+      if args[2] != nil
+        io = Ajaila::ConsoleHelper.additional_params(args)
+        file = Ajaila::ConsoleHelper.get_file(io)
+        file_name = Ajaila::ConsoleHelper.get_file(io).split(".").first.upcase
+        table = Ajaila::ConsoleHelper.get_table(io)
+        all_columns = Ajaila::ConsoleHelper.get_columns(table)
+        clast = all_columns.pop
+        cleft = all_columns
+        content += "\n" + Ajaila::ConsoleHelper.render( "_parser", :columns => cleft, :last => clast, :collection => table, :file => file, :file_name => file_name )
+      end
     end
 
     if args[0] == "miner"
