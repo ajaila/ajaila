@@ -18,4 +18,10 @@ Gem::Specification.new do |s|
   s.add_dependency("liquid")
   s.add_dependency("foreman")
   s.add_dependency("sinatra")
+
+  s.add_dependency("activerecord")
+  s.add_dependency("data_miner")
+  s.add_dependency("squeel")
+  s.add_dependency("pg")
+
 end
