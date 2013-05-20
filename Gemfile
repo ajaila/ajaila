@@ -12,3 +12,8 @@ gem "tilt"
 gem "liquid"
 gem "foreman"
 gem "sinatra"
+
+gem "activerecord"
+gem "data_miner"
+gem "squeel"
+gem "pg"
