@@ -1,8 +1,8 @@
 $:.unshift File.expand_path("../", __FILE__)
 require "messager"
 
-KNOWN_INSTANCES = ["miner","selector","presenter","table","api"]
-KNOWN_CLASSES = ["Array", "Float", "Hash", "Integer", "NilClass", "Object", "String", "Time", "Binary", "Boolean", "Date", "ObjectId", "Set"]
+KNOWN_INSTANCES = ["miner","selector","table","api"]
+KNOWN_CLASSES = ["Float", "Integer", "String", "Time", "Boolean", "Date"]
 TEMPLATES = File.expand_path( "../generator_templates", __FILE__)
 SUPPORTED_INPUTS = ["csv"]
 
@@ -13,10 +13,10 @@ module Ajaila
   ##
   # Checks parameters of the "ajaila g ____" command
   def check_inputs_g(args)
+    raise TypeError, Ajaila::Messager.warning("Unknown type of object...") if KNOWN_INSTANCES.include?(args[0]) == false
     raise TypeError, Ajaila::Messager.warning("Nothing to generate...") if args == []
-    raise TypeError, Ajaila::Messager.warning("Only miners, selectors, presenters supported\n(ex. miner SomeMiner, selector SomeSelector,\n presenter SomePresenter, table SomeTable)") if KNOWN_INSTANCES.include?(args[0]) == false
     raise TypeError, Ajaila::Messager.warning("Your #{args[0]} needs a name!") if args[1] == nil
-    raise TypeError, Ajaila::Messager.warning("Wrong format of the #{args[0]} name (use only A-Z and a-z symbols)") if args[1][/^[A-Z]+$/i] == nil
+    raise TypeError, Ajaila::Messager.warning("Wrong format of the #{args[0]} name (use only A-Z and a-z symbols)") if args[1][/^[A-Z]+$/i, 0] == nil
     return 0
   end
 
@@ -43,7 +43,6 @@ module Ajaila
   def target_dir(instance)
     return "datasets/" if instance == "selector"
     return "sandbox/miners/" if instance == "miner"
-    return "sandbox/presenters/" if instance == "presenter"
     return "sandbox/tables/" if instance == "table"
   end
 

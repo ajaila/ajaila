@@ -2,7 +2,7 @@ $LOAD_PATH.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "ajaila"
-  s.version = '0.0.2alpha' # 19 of March Release, later commits are not included
+  s.version = '0.0.1'
   s.platform = Gem::Platform::RUBY
   s.authors = ["Max Makarochkin"]
   s.email = ["maxim.makarochkin at gmail.com"]
@@ -24,6 +24,4 @@ Ajaila helps you build long-lasting software and provides you with environment, 
   s.add_dependency("liquid")
   s.add_dependency("foreman")
   s.add_dependency("sinatra")
-  s.add_dependency("mongo_mapper")
-  s.add_dependency("rubyvis")
 end

@@ -23,8 +23,6 @@ command :new do |c|
     puts "\tprepared Sandbox directory"
     Dir::mkdir("#{app_root}/sandbox/miners")
     puts "\tprepared Miners folder in the Sandbox directory"
-    Dir::mkdir("#{app_root}/sandbox/presenters")
-    puts "\tprepared Presenters folder in the Sandbox directory"
     Dir::mkdir("#{app_root}/sandbox/tables")
     puts "\tprepared Tables folder in the Sandbox directory"
     Dir::mkdir("#{app_root}/sandbox/helpers")
@@ -53,12 +51,6 @@ command :new do |c|
 
     File.open(app_root+"/sandbox/helpers/application.helper.rb", 'w') {|f| f.write("# Application Helper")}
     puts "\tprepared application helper"
-    message = '
-        ------------------------------------
-         You can now specify your database
-          name inside "config/db.rb"
-        ------------------------------------ '
-    puts Ajaila::Messager.success (message)
-
+    
   end
 end

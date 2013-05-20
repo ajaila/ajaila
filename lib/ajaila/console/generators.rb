@@ -39,11 +39,6 @@ command :g do |c|
       end
     end
     
-    if args[0] == "presenter"
-      io = Ajaila::ConsoleHelper.additional_params(args)
-      table = Ajaila::ConsoleHelper.get_table(io)
-      content = Ajaila::ConsoleHelper.render("presenter", :table => table)
-    end
     instance = args[0]
     dir = Ajaila::ConsoleHelper.target_dir(instance)
     helper_content = Ajaila::ConsoleHelper.render("helper", :miner => instance_title) if args[0] == "miner"
