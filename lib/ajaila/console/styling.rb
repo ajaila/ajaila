@@ -5,7 +5,7 @@ class Colors
    DARKGREEN = "\e[0;32;40m"
    YELLOW = "\e[1;33;40m"
    DARKCYAN = "\e[0;36;40m"
-   INFO = "\033[34m" #{}"\e[0;36;1m"
+   INFO = "\e[1;33;40m"
    WARNING = "\033[33m"
    ERROR = "\033[31m"
    SUCCESS = "\033[32m"

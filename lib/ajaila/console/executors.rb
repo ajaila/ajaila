@@ -4,11 +4,10 @@ command :run do |c|
     if args == []
       puts Ajaila::Messager.info("This feature is not supported currently. To run dashboard you can type 'foreman start' or 'ruby service.rb' from the root folder of your application.")
     else
-
-      options = args #[0].split(":")
+      options = args
       instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
       instance_title = options[1]
-      types = ["miner","selector"]
+      types = ["miner", "selector"]
       message = "CHECK YOURSELF\n   To run ajaila environment: ajaila run\n   To run miner: ajaila run miner some_miner\n   To run selector: ajaila run selector some_selector"
       raise Ajaila::Messager.info(message) if types.include?(options.first) == false
 

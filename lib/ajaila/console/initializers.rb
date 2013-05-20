@@ -51,6 +51,5 @@ command :new do |c|
 
     File.open(app_root+"/sandbox/helpers/application.helper.rb", 'w') {|f| f.write("# Application Helper")}
     puts "\tprepared application helper"
-    
   end
 end

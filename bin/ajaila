@@ -1,22 +1,4 @@
 #!/usr/bin/env ruby
-$:.unshift File.expand_path("../../lib", __FILE__)
-
-require "rubygems"
-require "gli"
-include GLI::App
-require "rio"
-require "liquid"
-require "tilt"
-
-require "ajaila/console/styling"
-require "ajaila/console/messager"
-require "ajaila/root_definer"
-require "ajaila/console/console_helper"
-require "ajaila/console/initializers"
-require "ajaila/console/generators"
-require "ajaila/console/executors"
-require "ajaila/console/status"
-
+$:.unshift File.expand_path("../../lib/", __FILE__)
+require "ajaila/console/console"
 exit run(ARGV)
-
-
