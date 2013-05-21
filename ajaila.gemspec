@@ -24,4 +24,6 @@ Gem::Specification.new do |s|
   s.add_dependency("squeel")
   s.add_dependency("pg")
 
+  s.add_dependency("bombshell")
+
 end

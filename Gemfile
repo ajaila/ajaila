@@ -17,3 +17,5 @@ gem "activerecord"
 gem "data_miner"
 gem "squeel"
 gem "pg"
+
+gem "bombshell"

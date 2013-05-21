@@ -1,4 +1,4 @@
-class Miners
+class Miners < App
   @miners = []
   MINER_METHODS = [:input, :process, :output]
   def self.inherited(miner)

@@ -1,6 +1,6 @@
 command :help do |c|
   c.action do |global_options,options,args|
-    puts "Ajaila Datamining Sandbox v. 0.0.2" 
+    puts "Ajaila: modular DSL for predictive analysis (stealthmode version)." 
   end
 end
 
