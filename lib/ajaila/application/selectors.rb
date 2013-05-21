@@ -2,6 +2,25 @@ class Selector < App
   @selectors = []
   SELECTOR_METHODS = [:prepare, :import]
 
+  def self.all
+    @selectors
+  end
+
+  def from_file(file)
+    "#{ROOT}/datasets/raw/#{file}"
+  end
+
+  def direct_import_from_csv(dataset, opts = {:to => nil, :delimiter => nil, :header => nil})
+    puts Ajaila::Messager.info("Make sure that columns order in the table is similar to the one in the file.")
+    delimiter = opts[:delimiter] || ","
+    header = "HEADER" if opts[:header] == true
+    table = opts[:to].table_name
+    raise TypeError, Ajaila::Messager.error("Dataset is not specified...") if dataset.class != String
+    ActiveRecord::Base.connection.execute("COPY #{table} FROM '#{dataset}' DELIMITER \'#{delimiter}\' CSV #{header}")
+  end
+  
+  private  
+
   def self.inherited(selector)
     @selectors << selector
     add_execution(selector)
@@ -20,18 +39,5 @@ class Selector < App
       raise "Oops... There is no #{method} for #{selector}..." if selector.instance_methods.include?(method) == false
     end
   end
-
-  def from_file(file)
-    "#{ROOT}/datasets/raw/#{file}"
-  end
-
-  def direct_import_from_csv(dataset, opts = {:to => nil, :delimiter => nil, :header => nil})
-    puts Ajaila::Messager.info("Make sure that columns order in the table is similar to the one in the file.")
-    delimiter = opts[:delimiter] || ","
-    header = "HEADER" if opts[:header] == true
-    table = opts[:to].table_name
-    raise TypeError, Ajaila::Messager.error("Dataset is not specified...") if dataset.class != String
-    ActiveRecord::Base.connection.execute("COPY #{table} FROM '#{dataset}' DELIMITER \'#{delimiter}\' CSV #{header}")
-  end
-
+  
 end

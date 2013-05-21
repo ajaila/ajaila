@@ -1,6 +1,6 @@
 $:.unshift File.expand_path("../", __FILE__)
 require "root_definer"
-Ajaila::RootDefiner.set_root # rescue nil
+Ajaila::RootDefiner.set_root
 
 require "application/app"
 
