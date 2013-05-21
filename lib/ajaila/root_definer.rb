@@ -30,7 +30,7 @@ module Ajaila
 
     def set_root
       begin
-        Object.const_set("ROOT", find_root(Dir::pwd))
+        Object.const_set("ROOT", find_root(Dir::pwd)) unless defined?( ROOT )
       rescue SystemStackError
         raise Ajaila::Messager.error("PLEASE, GO THE DIRECTORY OF YOUR APP")
       end
