@@ -1,5 +1,4 @@
 #!/usr/bin/env ruby
 $:.unshift File.expand_path("../../lib/", __FILE__)
-require "ajaila/application"
 require "ajaila/console/console"
 exit run(ARGV)

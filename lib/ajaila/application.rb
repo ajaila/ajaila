@@ -1,6 +1,3 @@
-$:.unshift File.expand_path("../../../", __FILE__)
-require 'bundler/setup'
-
 $:.unshift File.expand_path("../", __FILE__)
 require "application/app"
 require "root_definer"

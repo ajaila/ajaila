@@ -1,6 +1,9 @@
+$:.unshift File.expand_path("../../", __FILE__)
+require "application"
+
 command :run do |c|
   c.action do |global_options,options,args|
-    Ajaila::RootDefiner.set_root
+  #  Ajaila::RootDefiner.set_root
     if args == []
       puts Ajaila::Messager.info("This feature is not supported currently. To run dashboard you can type 'foreman start' or 'ruby service.rb' from the root folder of your application.")
     else
@@ -46,11 +49,9 @@ post do |global_options,command,options,args|
       instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
       instance_title = options[1]
       if options.first == "miner"
-        # system "ruby #{ROOT}/sandbox/miners/#{instance_file}.miner.rb"
         Ajaila::ConsoleHelper.constantize(instance_title).execute
       end
       if options.first == "selector"
-        # system "ruby #{ROOT}/datasets/#{instance_file}.selector.rb"
         Ajaila::ConsoleHelper.constantize(instance_title).execute
       end
     end
