@@ -8,6 +8,7 @@ command :run do |c|
       instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
       instance_title = options[1]
       types = ["miner", "selector"]
+
       message = "CHECK YOURSELF\n   To run ajaila environment: ajaila run\n   To run miner: ajaila run miner some_miner\n   To run selector: ajaila run selector some_selector"
       raise Ajaila::Messager.info(message) if types.include?(options.first) == false
 
@@ -20,6 +21,7 @@ command :run do |c|
         raise Ajaila::Messager.warning(message) if miners == [] or miners.include?(instance_file) == false        
         puts Ajaila::Messager.info("Running Miner \"#{instance_title}\". Just a few seconds...")
       end
+      
       if options.first == "selector"
         selectors = []
         Dir[ROOT + "/datasets/*.selector.rb"].each do |miner|
@@ -29,6 +31,8 @@ command :run do |c|
         raise Ajaila::Messager.warning(warn) if selectors == [] or selectors.include?(instance_file) == false
         puts Ajaila::Messager.info("Running Selector \"#{instance_title}\". Just a few seconds...")
       end
+
+
     end  
   end
 end
@@ -42,10 +46,12 @@ post do |global_options,command,options,args|
       instance_file = Ajaila::ConsoleHelper.name_to_file(options[1])
       instance_title = options[1]
       if options.first == "miner"
-        system "ruby #{ROOT}/sandbox/miners/#{instance_file}.miner.rb"
+        # system "ruby #{ROOT}/sandbox/miners/#{instance_file}.miner.rb"
+        Ajaila::ConsoleHelper.constantize(instance_title).execute
       end
       if options.first == "selector"
-        system "ruby #{ROOT}/datasets/#{instance_file}.selector.rb"
+        # system "ruby #{ROOT}/datasets/#{instance_file}.selector.rb"
+        Ajaila::ConsoleHelper.constantize(instance_title).execute
       end
     end
   end
