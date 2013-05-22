@@ -1,4 +1,4 @@
-class Selector < App
+class Selectors < App
   @selectors = []
   SELECTOR_METHODS = [:prepare, :import]
 
@@ -39,5 +39,5 @@ class Selector < App
       raise "Oops... There is no #{method} for #{selector}..." if selector.instance_methods.include?(method) == false
     end
   end
-  
+
 end
