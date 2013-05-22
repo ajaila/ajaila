@@ -1,4 +1,4 @@
-class Selectors < App
+class Selector < App
   @selectors = []
   SELECTOR_METHODS = [:prepare, :import]
 

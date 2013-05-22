@@ -17,8 +17,8 @@ command :run do |c|
 
       if options.first == "miner"
         miners = []
-        Dir[ROOT + "/sandbox/miners/*.miner.rb"].each do |miner|
-          miners << File.basename(miner).split(".").first
+        Dir[ROOT + "/sandbox/miners/*_miner.rb"].each do |miner|
+          miners << File.basename(miner).split("_miner").first
         end 
         message = "MINER \"#{instance_title}\" DOESN'T EXIST\nTo create miner type: ajaila g miner"
         raise Ajaila::Messager.warning(message) if miners == [] or miners.include?(instance_file) == false        
@@ -27,8 +27,8 @@ command :run do |c|
       
       if options.first == "selector"
         selectors = []
-        Dir[ROOT + "/datasets/*.selector.rb"].each do |miner|
-          selectors << File.basename(miner).split(".").first
+        Dir[ROOT + "/datasets/*_selector.rb"].each do |miner|
+          selectors << File.basename(miner).split("_selector").first
         end
         warn = "SELECTOR \"#{instance_title}\" DOESN'T EXIST\nTo create selector type: ajaila g selector #{instance_title}"
         raise Ajaila::Messager.warning(warn) if selectors == [] or selectors.include?(instance_file) == false

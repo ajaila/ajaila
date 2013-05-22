@@ -1,4 +1,4 @@
-class Miners < App
+class Miner < App
   @miners = []
   MINER_METHODS = [:input, :process, :output]
 

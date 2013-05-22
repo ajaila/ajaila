@@ -20,14 +20,14 @@ DB_CONFIG = YAML::load(File.open(ROOT + "/config/database.yml"))
 ActiveRecord::Base.establish_connection(DB_CONFIG["development"])
 ActiveRecord::Base.logger = Logger.new(STDERR)
 
-Dir.glob(ROOT + "/sandbox/tables/*.table.rb").each do |table|
+Dir.glob(ROOT + "/sandbox/tables/*_table.rb").each do |table|
   require "sandbox/tables/#{File.basename(table)}"
 end
 
-Dir.glob(ROOT + "/sandbox/miners/*.miner.rb").each do |miner|
+Dir.glob(ROOT + "/sandbox/miners/*_miner.rb").each do |miner|
   require "sandbox/miners/#{File.basename(miner)}"
 end
 
-Dir.glob(ROOT + "/datasets/*.selector.rb").each do |selector|
+Dir.glob(ROOT + "/datasets/*_selector.rb").each do |selector|
   require "datasets/#{File.basename(selector)}"
 end
