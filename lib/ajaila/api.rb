@@ -12,14 +12,6 @@ module Ajaila
     return min < max ? more.call(array) : array.fill(1.0)
   end
 
-  def execute_miner(name)
-    system "ajaila run miner #{name}"
-  end
-
-  def execute_selector(name)
-    system "ajaila run selector #{name}"
-  end
-
   def all_days_at_interval(time_start, time_end)
     output = []
     while time_start < time_end

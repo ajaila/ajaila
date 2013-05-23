@@ -18,6 +18,7 @@ command :new do |c|
     Dir::mkdir("#{app_root}/datasets")
     puts "\tprepared Datasets directory"
     Dir::mkdir("#{app_root}/datasets/raw")
+    Dir::mkdir("#{app_root}/datasets/raw/temp")
     puts "\tprepared Raw folder in the Datasets directory"
     Dir::mkdir("#{app_root}/sandbox")
     puts "\tprepared Sandbox directory"
