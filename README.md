@@ -4,6 +4,7 @@
     The official release will be announced later.
     Any suggestion for modification is welcome.
 
+[![Build Status](https://travis-ci.org/ajaila/ajaila.png?branch=master)](https://travis-ci.org/ajaila/ajaila) [![Code Climate](https://codeclimate.com/github/ajaila/ajaila.png)](https://codeclimate.com/github/ajaila/ajaila) [![Dependency Status](https://gemnasium.com/ajaila/ajaila.png)](https://gemnasium.com/ajaila/ajaila)
 
 ### License
 
