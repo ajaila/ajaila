@@ -1,21 +1,8 @@
 source 'https://rubygems.org'
 
-group :test do
-  gem "rake"
-  gem "rspec"
-end
-
-gem "rio"
-gem "gli"
-gem "rdoc"
-gem "tilt"
-gem "liquid"
-gem "foreman"
-gem "sinatra"
-
-gem "activerecord"
-gem "data_miner"
-gem "squeel"
-gem "pg"
-
-gem "bombshell"
+gem 'rake'
+gem 'activerecord'
+gem 'active_record_inline_schema'
+gem 'squeel'
+gem 'awesome_print'
+gem 'bundler'

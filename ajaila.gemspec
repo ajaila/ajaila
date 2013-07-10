@@ -2,7 +2,7 @@ $LOAD_PATH.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name = "ajaila"
-  s.version = '0.0.1'
+  s.version = "0.0.1"
   s.platform = Gem::Platform::RUBY
   s.authors = ["Max Makarochkin"]
   s.email = ["maxim.makarochkin at gmail.com"]
@@ -12,18 +12,12 @@ Gem::Specification.new do |s|
   s.rubyforge_project = "ajaila"
   s.executables = ["ajaila"]
   s.files = Dir.glob("{bin,lib,spec}/**/*")
-  s.add_dependency("rio")
-  s.add_dependency("gli")
-  s.add_dependency("tilt")
-  s.add_dependency("liquid")
-  s.add_dependency("foreman")
-  s.add_dependency("sinatra")
 
+  s.add_dependency("rake")
   s.add_dependency("activerecord")
-  s.add_dependency("data_miner")
+  s.add_dependency("active_record_inline_schema")
   s.add_dependency("squeel")
-  s.add_dependency("pg")
-
-  s.add_dependency("bombshell")
+  s.add_dependency("awesome_print")
+  s.add_dependency("bundler")
 
 end
