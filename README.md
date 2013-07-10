@@ -4,13 +4,12 @@
     The official release will be announced later.
     Any suggestion for modification is welcome.
 
-![Ajaila v.0.0.2 Architecture](https://raw.github.com/mac-r/ajaila-media/master/ajaila_002_architecture.png)
 
 ## License
 
 The MIT License
 
-Copyright (c) 2013 Max Makarochkin
+Copyright (c) 2013 Max Makarochkin and co-authors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
