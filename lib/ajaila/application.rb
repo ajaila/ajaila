@@ -1,6 +1,6 @@
 module Ajaila
   class Application
-    CONFIG_PATH = "config/analytics.yml"
+    CONFIG_PATH = "config/application.yml"
 
     attr_reader :env
     delegate :hint, :note, to: :logger
@@ -24,8 +24,8 @@ module Ajaila
       load_classes
       note "Establishing database connection"
       establish_database_connection
-      note "Running migrations"
-      run_migrations
+      note "Running auto-upgrade migrations"
+      run_auto_upgrade_migrations
       note "Application has been initialized"
       self
     end
@@ -58,6 +58,10 @@ module Ajaila
       drop_database!
     rescue
       hint "The database #{database_config['database']} does not exist"
+    end
+
+    def migrate_database(version = nil)
+      ActiveRecord::Migrator.migrate "app/migrations", version.try(:to_i)
     end
 
     # @return [Hash<String>]
@@ -125,7 +129,7 @@ module Ajaila
       config['enable_logging'] ? STDOUT : nil
     end
 
-    def run_migrations
+    def run_auto_upgrade_migrations
       ActiveRecord::Base.subclasses.each do |model|
         model.auto_upgrade!
       end

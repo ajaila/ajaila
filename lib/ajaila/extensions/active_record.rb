@@ -19,6 +19,10 @@ module Ajaila
       def pluck_uniq(field)
         pluck(field).uniq.compact
       end
+
+      def auto_upgrade!
+        true
+      end
     end
   end
 end

@@ -1,8 +1,11 @@
 desc "Runs irb console and initializes the application"
-task :console, :env do |_, args|
+task :console, [:env] => :environment do |_, args|
   require 'irb'
 
-  env = args[:env] || 'development'
+  unless env = ENV['AJAILA_ENV']
+    env = args[:env] || 'development'
+  end
+
   system "mkdir -p #{Dir.pwd}/db/#{env}"
 
   Ajaila::Application.new(env) do |app|

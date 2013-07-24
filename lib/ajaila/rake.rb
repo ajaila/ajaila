@@ -18,5 +18,6 @@ rescue Bundler::BundlerError => e
   exit e.status_code
 end
 
+Dir["#{File.expand_path("../", __FILE__)}/tasks/engine/*.rake"].each(&method(:load))
 Dir["#{File.expand_path("../", __FILE__)}/tasks/*.rake"].each(&method(:load))
 Dir["#{Dir.pwd}/app/tasks/**/*.rake"].each(&method(:load))
