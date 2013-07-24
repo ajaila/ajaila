@@ -29,7 +29,7 @@ module Ajaila
       attr_accessor :name
 
       def initialize(name)
-        @name = "#{name.camelize}AjailaMigration"
+        @name = name.camelize
         validate!
       end
 

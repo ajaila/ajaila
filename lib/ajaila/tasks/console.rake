@@ -1,5 +1,5 @@
 desc "Runs irb console and initializes the application"
-task :console, [:env] => :environment do |_, args|
+task :console, :env do |_, args|
   require 'irb'
 
   unless env = ENV['AJAILA_ENV']
