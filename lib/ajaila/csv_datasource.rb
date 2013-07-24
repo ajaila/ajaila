@@ -22,6 +22,7 @@ class Ajaila::CsvDatasource < Ajaila::Datasource
     end
   end
 
+  # Needs to be deprecated.
   # @overload
   def import
     model.reset!
@@ -32,9 +33,18 @@ class Ajaila::CsvDatasource < Ajaila::Datasource
 
   # @param [String] delimiter CSV splitting character: , ; | etc
   # @param [true, false] use_header
-  def direct_import_from_csv(delimiter = ',', use_header = true)
-    ActiveRecord::Base.connection.
-                       execute(%Q{COPY #{model.table_name} FROM '#{file_path}'
-                                  DELIMITER \'#{delimiter}\' CSV #{"HEADER" if use_header}})
+  # def direct_import_from_csv(delimiter = ',', use_header = true)
+  #   ActiveRecord::Base.connection.
+  #                      execute(%Q{COPY #{model.table_name} FROM '#{file_path}'
+  #                                 DELIMITER \'#{delimiter}\' CSV #{"HEADER" if use_header}})
+  # end
+
+  def direct_import_from_csv(dataset, opts = {:to => nil, :delimiter => nil, :header => nil})
+    delimiter = opts[:delimiter] || ","
+    header = "HEADER" if opts[:header] == true
+    table = opts[:to].table_name
+    raise TypeError if dataset.class != String
+    ActiveRecord::Base.connection.execute("COPY #{table} FROM '#{dataset}' DELIMITER \'#{delimiter}\' CSV #{header}")
   end
+
 end

@@ -3,8 +3,9 @@ module Ajaila
 
     # @todo (MM) docu, YARD
     # Imports data into local database
-    def import
+    def self.import
       raise NotImplementedError
     end
   end
 end
+
