@@ -39,14 +39,14 @@ module Ajaila
 
     def create_database!(name = 'default')
       establish_postgres_connection(name)
-      ActiveRecord::Base.connection.create_database(database_config[name]['database'])
-      puts "The database #{database_config[name]['database']} has been successfully created"
+      ActiveRecord::Base.connection.create_database(database_config[name][env]['database'])
+      puts "The database #{database_config[name][env]['database']} has been successfully created"
     end
 
     def drop_database!(name = 'default')
       establish_postgres_connection(name)
-      ActiveRecord::Base.connection.drop_database(database_config[name]['database'])
-      puts "The database #{database_config[name]['database']} has been successfully dropped"
+      ActiveRecord::Base.connection.drop_database(database_config[name][env]['database'])
+      puts "The database #{database_config[name][env]['database']} has been successfully dropped"
     end
 
     def migrate_database(version = nil)
