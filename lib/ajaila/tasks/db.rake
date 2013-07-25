@@ -7,8 +7,10 @@ namespace :db do
   end
 
   desc "Drops database"
-  task drop: :environment do
-    Ajaila.app.drop_database!
+  task :drop do
+    env = ENV['AJAILA_ENV'] || 'development'
+    puts "Loading #{env.inspect}"
+    Ajaila::Application.new(env).drop_database!
   end
 
   desc "Runs migrations"
