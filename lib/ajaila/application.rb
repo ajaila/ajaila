@@ -9,7 +9,6 @@ module Ajaila
     # @param [String] env Environment from configuration file
     def initialize(env = nil)
       @env = env || ENV['AJAILA_ENV'] || 'development'
-      @logger = Ajaila::Logger.new(log_level)
       load_path('config/initializers')
       Ajaila.app = self
       yield self if block_given?
@@ -18,7 +17,7 @@ module Ajaila
     # Entry point for the app
     # @return [Application]
     def init!
-      @config = @database_config = nil
+      @logger = @config = @database_config = nil
 
       load_application_config
       load_database_config
@@ -38,28 +37,16 @@ module Ajaila
       @config || load_application_config
     end
 
-    def create_database!
-      establish_postgres_connection
-      ActiveRecord::Base.connection.create_database(database_config['database'])
-      puts "The database #{database_config['database']} has been successfully created"
+    def create_database!(name = 'default')
+      establish_postgres_connection(name)
+      ActiveRecord::Base.connection.create_database(database_config[name]['database'])
+      puts "The database #{database_config[name]['database']} has been successfully created"
     end
 
-    def create_database
-      create_database!
-    rescue
-      puts "The database #{database_config['database']} already exist"
-    end
-
-    def drop_database!
-      establish_postgres_connection
-      ActiveRecord::Base.connection.drop_database(database_config['database'])
-      puts "The database #{database_config['database']} has been successfully dropped"
-    end
-
-    def drop_database
-      drop_database!
-    rescue
-      puts "The database #{database_config['database']} does not exist"
+    def drop_database!(name = 'default')
+      establish_postgres_connection(name)
+      ActiveRecord::Base.connection.drop_database(database_config[name]['database'])
+      puts "The database #{database_config[name]['database']} has been successfully dropped"
     end
 
     def migrate_database(version = nil)
@@ -85,7 +72,9 @@ module Ajaila
     private
 
     def establish_database_connection
-      ActiveRecord::Base.establish_connection(database_config)
+      if database_config
+        ActiveRecord::Base.establish_connection(database_config)
+      end
 
       if database_config['enable_logging']
         ActiveRecord::Base.logger = Logger.new(STDOUT)
@@ -93,9 +82,11 @@ module Ajaila
     end
 
     # Used to create/drop db
-    def establish_postgres_connection
-      ActiveRecord::Base.establish_connection(database_config.merge('database' => 'postgres',
-                                                                    'schema_search_path' => 'public'))
+    def establish_postgres_connection(name = 'default')
+      if database_config
+        ActiveRecord::Base.establish_connection(database_config[name].merge('database' => 'postgres',
+                                                                            'schema_search_path' => 'public'))
+      end
     end
 
     # Autoloads all app-specific classes
@@ -124,6 +115,11 @@ module Ajaila
     # @return [IO, nil]
     def log_level
       config['enable_logging'] ? STDOUT : nil
+    end
+
+    # @return [Ajaila::Logger]
+    def logger
+      @logger ||= Ajaila::Logger.new(log_level)
     end
 
     def run_auto_upgrade_migrations
