@@ -60,8 +60,8 @@ module Ajaila
 
     # @return [String] Database name
     def database
-      adapter  = database_config['adapter']
-      database = database_config['database']
+      adapter  = database_config['default'][env]['adapter']
+      database = database_config['default'][env]['database']
       adapter == 'sqlite3' ? "db/#{env}/#{database}.db" : database
     end
 
@@ -73,9 +73,9 @@ module Ajaila
 
     def establish_database_connection
       if database_config && database_config['default']
-        ActiveRecord::Base.establish_connection(database_config['default'])
+        ActiveRecord::Base.establish_connection(database_config['default'][env])
 
-        if database_config['default']['enable_logging']
+        if database_config['default'][env]['enable_logging']
           ActiveRecord::Base.logger = Logger.new(STDOUT)
         end
       end
@@ -83,9 +83,9 @@ module Ajaila
 
     # Used to create/drop db
     def establish_postgres_connection(name = 'default')
-      if database_config
-        ActiveRecord::Base.establish_connection(database_config[name].merge('database' => 'postgres',
-                                                                            'schema_search_path' => 'public'))
+      if database_config[name]
+        ActiveRecord::Base.establish_connection(database_config[name][env].merge('database' => 'postgres',
+                                                                                 'schema_search_path' => 'public'))
       end
     end
 
