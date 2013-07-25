@@ -12,10 +12,10 @@ task :console, :env do |_, args|
     app.init!
     app.hint("Use `Ajaila.app` variable to deal with application API")
 
-    if app.env == 'development'
+    #if app.env == 'development'
       require "awesome_print"
       AwesomePrint.irb!
-    end
+    #end
   end
 
   ARGV.clear
