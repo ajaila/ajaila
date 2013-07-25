@@ -3,11 +3,13 @@ module Ajaila
     CONFIG_PATH = "config/application.yml"
 
     attr_reader :env
+    attr_accessor :logger
     delegate :hint, :note, to: :logger
 
     # @param [String] env Environment from configuration file
     def initialize(env = nil)
       @env = env || ENV['AJAILA_ENV'] || 'development'
+      @logger = Ajaila::Logger.new(log_level)
       load_path('config/initializers')
       Ajaila.app = self
       yield self if block_given?
@@ -67,11 +69,6 @@ module Ajaila
     # @return [Hash<String>]
     def database_config
       @database_config || load_database_config
-    end
-
-    # @return [Logger]
-    def logger
-      @logger ||= Ajaila::Logger.new(log_level)
     end
 
     # @return [String] Database name
