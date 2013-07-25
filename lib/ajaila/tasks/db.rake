@@ -1,13 +1,14 @@
 namespace :db do
   desc "Creates database"
-  task :create do |_, args|
-    env = args[:env] || ENV['AJAILA_ENV'] || 'development'
-    Ajaila::Application.new(env).create_database
+  task :create do
+    env = ENV['AJAILA_ENV'] || 'development'
+    puts "Loading #{env.inspect}"
+    Ajaila::Application.new(env).create_database!
   end
 
   desc "Drops database"
   task drop: :environment do
-    Ajaila.app.drop_database
+    Ajaila.app.drop_database!
   end
 
   desc "Runs migrations"

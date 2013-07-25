@@ -39,25 +39,25 @@ module Ajaila
     def create_database!
       establish_postgres_connection
       ActiveRecord::Base.connection.create_database(database_config['database'])
-      hint "The database #{database_config['database']} has been successfully created"
+      puts "The database #{database_config['database']} has been successfully created"
     end
 
     def create_database
       create_database!
     rescue
-      hint "The database #{database_config['database']} already exist"
+      puts "The database #{database_config['database']} already exist"
     end
 
     def drop_database!
       establish_postgres_connection
       ActiveRecord::Base.connection.drop_database(database_config['database'])
-      hint "The database #{database_config['database']} has been successfully dropped"
+      puts "The database #{database_config['database']} has been successfully dropped"
     end
 
     def drop_database
       drop_database!
     rescue
-      hint "The database #{database_config['database']} does not exist"
+      puts "The database #{database_config['database']} does not exist"
     end
 
     def migrate_database(version = nil)
