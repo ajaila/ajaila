@@ -72,12 +72,12 @@ module Ajaila
     private
 
     def establish_database_connection
-      if database_config
-        ActiveRecord::Base.establish_connection(database_config)
-      end
+      if database_config && database_config['default']
+        ActiveRecord::Base.establish_connection(database_config['default'])
 
-      if database_config['enable_logging']
-        ActiveRecord::Base.logger = Logger.new(STDOUT)
+        if database_config['default']['enable_logging']
+          ActiveRecord::Base.logger = Logger.new(STDOUT)
+        end
       end
     end
 
