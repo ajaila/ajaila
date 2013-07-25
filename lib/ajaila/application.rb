@@ -16,7 +16,7 @@ module Ajaila
     # Entry point for the app
     # @return [Application]
     def init!
-      @logger = @config = @database_config = nil
+      @config = @database_config = nil
 
       load_application_config
       load_database_config
