@@ -104,7 +104,7 @@ module Ajaila
 
     # @return [Hash]
     def load_database_config
-      @database_config = YAML.load_file('config/databases.yml')[env]
+      @database_config = YAML.load_file('config/databases.yml')
     end
 
     # @param [String] path Relative to project root
