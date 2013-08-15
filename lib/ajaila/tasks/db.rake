@@ -32,5 +32,13 @@ namespace :db do
       puts "Loading #{env.inspect}"
       Ajaila::Application.new(env).drop_database!(args[:name])
     end    
+
+    desc "Runs test migrations"
+    task :migrate do
+      env = 'test'
+      puts "Loading #{env.inspect}"
+      Ajaila::Application.new(env).init!
+      ActiveRecord::Migrator.migrate("app/migrations/")
+    end
   end
 end
