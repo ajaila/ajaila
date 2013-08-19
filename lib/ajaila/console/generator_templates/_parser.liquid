@@ -1,7 +1,0 @@
-file = import "{{ file }}"
-
-CSV.foreach file do |row|{% for column in columns %}
-  {{ column }} = row[0]{% endfor %}
-  {{ last }} = row[0]
-  {{ collection }}.create({% for column in columns %}{{ column }}: {{ column }}, {% endfor %}{{ last }}: {{ last }})
-end

@@ -14,10 +14,6 @@ describe Ajaila do
   	args = ["table", "Foo"]
   	Ajaila::ConsoleHelper.check_inputs_g(args).should == 0
 
-  	# ajaila g presenter Foo
-  	args = ["presenter", "Foo"]
-  	Ajaila::ConsoleHelper.check_inputs_g(args).should == 0
-
   	# ajaila g shit Foo
   	args = ["shit", "Foo"]
   	lambda{Ajaila::ConsoleHelper.check_inputs_g(args)}.should raise_error
@@ -40,8 +36,6 @@ describe Ajaila do
     Ajaila::ConsoleHelper.target_dir(instance).should == "sandbox/miners/"
     instance = "selector"
     Ajaila::ConsoleHelper.target_dir(instance).should == "datasets/"
-    instance = "presenter"
-    Ajaila::ConsoleHelper.target_dir(instance).should == "sandbox/presenters/"
     instance = "table"
     Ajaila::ConsoleHelper.target_dir(instance).should == "sandbox/tables/"
   end
