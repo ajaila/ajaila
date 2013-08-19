@@ -12,6 +12,7 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("{bin,lib,spec}/**/*")
 
   s.add_dependency("rake")
+  s.add_dependency("active_record_inline_schema")
   s.add_dependency("activerecord")
   s.add_dependency("activesupport")
   s.add_dependency("squeel")
