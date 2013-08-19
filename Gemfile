@@ -1,8 +1,3 @@
-source 'https://rubygems.org'
+source "http://rubygems.org"
 
-gem 'rake'
-gem 'activerecord'
-gem 'activesupport'
-gem 'squeel'
-gem 'awesome_print'
-gem 'bundler'
+gemspec

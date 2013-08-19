@@ -1,5 +1,16 @@
+PATH
+  remote: .
+  specs:
+    ajaila (0.0.1)
+      activerecord
+      activesupport
+      awesome_print
+      bundler
+      rake
+      squeel
+
 GEM
-  remote: https://rubygems.org/
+  remote: http://rubygems.org/
   specs:
     activemodel (4.0.0)
       activesupport (= 4.0.0)
@@ -38,8 +49,4 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord
-  awesome_print
-  bundler
-  rake
-  squeel
+  ajaila!

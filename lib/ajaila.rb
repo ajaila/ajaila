@@ -1,5 +1,4 @@
 require 'active_record'
-require 'active_record_inline_schema'
 require 'squeel'
 
 require 'ajaila/extensions/active_record'

@@ -22,23 +22,9 @@ class Ajaila::CsvDatasource < Ajaila::Datasource
     end
   end
 
-  # Needs to be deprecated.
-  # @overload
-  def import
-    model.reset!
-    direct_import_from_csv
-  end
-
-  protected
-
-  # @param [String] delimiter CSV splitting character: , ; | etc
-  # @param [true, false] use_header
-  # def direct_import_from_csv(delimiter = ',', use_header = true)
-  #   ActiveRecord::Base.connection.
-  #                      execute(%Q{COPY #{model.table_name} FROM '#{file_path}'
-  #                                 DELIMITER \'#{delimiter}\' CSV #{"HEADER" if use_header}})
-  # end
-
+  # Supports Postgres only. Needs to be moved to ActiveRecord extensions.
+  # @param [String] dataset Where to find csv file (relative to project directory)
+  # @param [Hash] opts Parameters of the import. 
   def direct_import_from_csv(dataset, opts = {:to => nil, :delimiter => nil, :header => nil})
     delimiter = opts[:delimiter] || ","
     header = "HEADER" if opts[:header] == true
