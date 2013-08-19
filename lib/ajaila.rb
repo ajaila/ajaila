@@ -1,3 +1,4 @@
+require 'active_record_inline_schema'
 require 'active_record'
 require 'squeel'
 
